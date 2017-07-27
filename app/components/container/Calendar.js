@@ -1,17 +1,12 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  ScrollView,
-  View
-} from 'react-native';
+import {Text,StyleSheet,View} from 'react-native';
 import {Calendar} from 'react-native-calendars';
 
-export default class CalendarsScreen extends Component {
+export default class CalendarComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "2017-07-18",
+      selected: Date.now(),
       markedDates: {
         "2017-07-21": {marked: true},
         "2017-07-22": {marked: true},
@@ -75,7 +70,7 @@ const theme = {
     arrowColor: 'white',
     dotColor:"#bdbcd1",
     selectedDotColor: "black",
-    todayTextColor: "#a88482",
+    todayTextColor: "#b89b99",
     textDayHeaderFontSize: 14,
     textMonthFontSize: 18,
     textDayFontSize: 17
