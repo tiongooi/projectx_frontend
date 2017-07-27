@@ -1,14 +1,18 @@
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 import Dashboard from "./screens/Dashboard";
 import DaySummary from "./screens/DaySummary";
+import JobDetails from "./screens/JobDetails";
 
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
   Dashboard: {
-    screen: DaySummary
+    screen: JobDetails
   },
   DaySummary: {
     screen: Dashboard
+  },
+  JobDetails: {
+    screen: DaySummary
   }
 });
 
@@ -31,4 +35,4 @@ const Navigator = DrawerNavigator({
   // }
 });
 
-module.exports = Navigator;
+export default Navigator;
