@@ -9,7 +9,7 @@ import Weather from "../presentation/Weather";
 const TodaySnapshot = (props) => {
   return(
     <View>
-      <ThisDate date={props.date}/>
+      <ThisDate date={props.thisDate}/>
       <NumOfJobs numOfJobs={props.numOfJobs}/>
       <Temperature temperature={props.temperature}/>
       <Weather weather={props.weather}/>
@@ -22,7 +22,8 @@ function mapStateToProps(state) {
     numOfJobs: 3, //state.number,
     temperature: 14, //state.dataNumber,
     weather: "Sunny", //state.data,
-    date: "Wed, 14th July", //state.date
+    date: "Wed, 14th July", //state.date,
+    thisDate: Date.now()
   }
 };
 
