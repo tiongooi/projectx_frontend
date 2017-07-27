@@ -1,9 +1,13 @@
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 import Dashboard from "./screens/Dashboard";
+import DaySummary from "./screens/DaySummary";
 
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
   Dashboard: {
+    screen: DaySummary
+  },
+  DaySummary: {
     screen: Dashboard
   }
 });
