@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ScrollView,View,Text,TouchableHighlight} from 'react-native';
+import {ScrollView,View,Text,TouchableHighlight,StyleSheet} from 'react-native';
+import MapView from 'react-native-maps';
 import TaskCard from '../components/presentation/TaskCard';
 import JobCard from '../components/presentation/JobCard';
 import Avatar from '../components/presentation/Avatar';
+import Maps from '../components/presentation/Maps';
 import testJobObject from '../testJobObject';
 
 const JobDetails = (props) => {
@@ -14,7 +16,7 @@ const JobDetails = (props) => {
 
   return (
     <ScrollView>
-      <View><Text>Google map</Text></View>
+      <Maps location={props.location} />
       <JobCard client={props.job.client} title={props.job.title}/>
       <View>
         {
@@ -48,7 +50,13 @@ const JobDetails = (props) => {
 
 function mapStateToProps(state) {
   return {
-    job: testJobObject
+    job: testJobObject,
+    location: {
+      latitude:-33.865143,
+      longitude:151.209900,
+      latitudeDelta: 0.0040,
+      longitudeDelta: 0.0040
+    }
   }
 }
 
@@ -58,13 +66,13 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   testDiv: {
     backgroundColor:"red",
     width:40,
     height:40,
     borderRadius:50
   }
-}
+});
 
 module.exports = connect(mapStateToProps,mapDispatchToProps)(JobDetails);
