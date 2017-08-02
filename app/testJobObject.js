@@ -1,6 +1,16 @@
 const testJobObject =
   {
-    client: "john's backyard",
+    jobDate: 1501646432335,
+    client: {
+      name: "john's backyard",
+      contact: 1223534645,
+      location: {
+        street: '34 Bunn St',
+        suburb: 'Pyrmont',
+        longitude: 'n/a',
+        latitude: 'n/a'
+      }
+    },
     title: "month end maintenence",
     task: [
       {content:"sweep the floor"},
@@ -12,11 +22,13 @@ const testJobObject =
     ],
     employee: [
       {
-        avatar: "avatar not available",
+        id:1,
+        avatar: "avatar n/a",
         fName: "Ron"
       },
       {
-        avatar: "avatar not available",
+        id:2,
+        avatar: "avatar n/a",
         fName: "Jane"
       }
     ]

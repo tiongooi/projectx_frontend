@@ -9,7 +9,10 @@ import Maps from '../components/presentation/Maps';
 import testJobObject from '../testJobObject';
 
 const JobDetails = (props) => {
+
+  const navigate = props.navigation;
   let lastComment;
+
   if (props.job.comment.length !== 0) {
     lastComment = props.job.comment.pop()
   }

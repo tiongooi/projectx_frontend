@@ -6,13 +6,13 @@ import JobDetails from "./screens/JobDetails";
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
   Dashboard: {
-    screen: JobDetails
-  },
-  DaySummary: {
     screen: Dashboard
   },
-  JobDetails: {
+  DaySummary: {
     screen: DaySummary
+  },
+  JobDetails: {
+    screen: JobDetails
   }
 });
 

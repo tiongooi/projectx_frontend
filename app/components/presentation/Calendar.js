@@ -6,12 +6,7 @@ export default class CalendarComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: Date.now(),
-      markedDates: {
-        "2017-07-21": {marked: true},
-        "2017-07-22": {marked: true},
-        "2017-07-20": {marked: true}
-      }
+      selected: this.props.initialSelect,
     };
     this.onDayPress = this.onDayPress.bind(this);
   }
@@ -19,13 +14,12 @@ export default class CalendarComponent extends Component {
   render() {
     return (
       <View>
-        <Text style={styles.text}>You selected: {this.state.selected}</Text>
         <Calendar
           onDayPress={this.onDayPress}
           style={styles.calendar}
           hideExtraDays
           selected={[this.state.selected]}
-          markedDates={this.state.markedDates}
+          markedDates={this.props.markedDates}
           theme={theme}
         />
       </View>
@@ -36,6 +30,7 @@ export default class CalendarComponent extends Component {
     this.setState({
       selected: day.dateString
     });
+    this.props.clicked(day);
   }
 
 }
