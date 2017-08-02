@@ -9,7 +9,7 @@ const Maps = (props) => {
 
   function goToCoord() {
     const mapViewLocation = location;
-    //fit to coordinates -too close
+    //fit to coordinates -too close 
     // mapView.fitToCoordinates([mapViewLocation], {
     //   edgePadding:{top:1000, bottom:1000, left:1000, right:1000},
     //   animated: true

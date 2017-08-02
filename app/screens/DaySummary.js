@@ -7,68 +7,72 @@ import Avatar from '../components/presentation/Avatar';
 import testJobData from '../testJobData';
 
 const DaySummary = (props) => {
-  let displayJobsAndEmployees = '';
-  let daysJob = props.daysSetJobs.length;
-  let daysEmployee = 0;
 
-  props.daysSetJobs.map(job => {
-    daysEmployee += job.employee.length
-  });
+  const {navigate} = props.navigation;
+  const todaysJobs = props.navigation.state.params;
+  let jobz = false;
 
-  if (daysJob !== 0) {
-    if (daysJob === 1) {
-      if (daysEmployee === 0) {
-        displayJobsAndEmployees = daysJob + " job set for the day"
-      } else if (daysEmployee === 1) {
-        displayJobsAndEmployees = daysJob + " job, " + daysEmployee + " employee set for the day"
-      } else {
-        displayJobsAndEmployees = daysJob + " job, " + daysEmployee + " employees set for the day"
-      }
-    } else if (daysJob > 1) {
-      if (daysEmployee === 0) {
-        displayJobsAndEmployees = daysJob + " jobs set for the day"
-      } else if (daysEmployee === 1) {
-        displayJobsAndEmployees = daysJob + " jobs, " + daysEmployee + " employee set for the day"
-      } else {
-        displayJobsAndEmployees = daysJob + " jobs, " + daysEmployee + " employees set for the day"
-      }
-    }
-  } else {
-    displayJobsAndEmployees = "No job set for the day"
-  }
 
-  return(
-    <ScrollView>
-      <View>
-        <TouchableHighlight onPress={props.click}><View style={styles.button}></View></TouchableHighlight>
-          <ThisDate date={props.date} />
-        <TouchableHighlight onPress={props.click}><View style={styles.button}></View></TouchableHighlight>
-      </View>
-      <View>
-        {
-          props.daysSetJobs.map(job => {
-             return job.employee.map((employee,index) => {
-               return <Avatar avatar={employee.avatar} name={employee.fName} key={index} />
+      let displayJobsAndEmployees = '';
+      let numOfJobs = todaysJobs.length;
+      let daysEmployee = 0;
+
+      todaysJobs.map(job => {
+        daysEmployee += job.employee.length
+      });
+
+        if (todaysJobs.length === 1) {
+          if (daysEmployee === 0) {
+            displayJobsAndEmployees = todaysJobs.length + " job set for the day"
+          } else if (daysEmployee === 1) {
+            displayJobsAndEmployees = todaysJobs.length + " job, " + daysEmployee + " employee set for the day"
+          } else {
+            displayJobsAndEmployees = todaysJobs.length + " job, " + daysEmployee + " employees set for the day"
+          }
+        } else if (todaysJobs.length > 1) {
+          if (daysEmployee === 0) {
+            displayJobsAndEmployees = todaysJobs.length + " jobs set for the day"
+          } else if (daysEmployee === 1) {
+            displayJobsAndEmployees = todaysJobs.length + " jobs, " + daysEmployee + " employee set for the day"
+          } else {
+            displayJobsAndEmployees = todaysJobs.length + " jobs, " + daysEmployee + " employees set for the day"
+          }
+        };
+
+
+      return(
+        <ScrollView>
+          <View>
+            <TouchableHighlight onPress={props.click}><View style={styles.button}></View></TouchableHighlight>
+              <ThisDate date={props.date} />
+            <TouchableHighlight onPress={props.click}><View style={styles.button}></View></TouchableHighlight>
+          </View>
+          {jobz ? (<Text>true-haha</Text>):(<Text>false-boo</Text>)}
+          {/* <View>
+            {
+              props.daysJobs.map(job => {
+                 return job.employee.map((employee,index) => {
+                   return <Avatar avatar={employee.avatar} name={employee.fName} key={index} />
+                })
+              })
+            }
+          </View>
+          <View>
+            <Text>{displayJobsAndEmployees}</Text>
+          </View>
+          {
+            props.daysJobs.map((job,index) => {
+              return <JobCard client={job.client} title={job.title} key={index} />
             })
-          })
-        }
-      </View>
-      <View>
-        <Text>{displayJobsAndEmployees}</Text>
-      </View>
-      {
-        props.daysSetJobs.map((job,index) => {
-          return <JobCard client={job.client} title={job.title} key={index} />
-        })
-      }
-    </ScrollView>
-  )
-};
+          } */}
+        </ScrollView>
+      )
+  };
 
 function mapStateToProps(state) {
   return {
     date: new Date(),
-    daysSetJobs: testJobData
+    daysJobs: testJobData
   }
 };
 
