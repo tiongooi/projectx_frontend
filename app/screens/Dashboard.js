@@ -30,18 +30,18 @@ const Dashboard = (props) => {
       if (today.getTime() > job.date.timestamp) {
         let property = new Date(job.date.timestamp).toISOString().slice(0,10);
         Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
-        passedJobs.push(job)
+        passedJobs.push(job);
       } else if (today.getTime() < job.date.timestamp) {
         let property = new Date(job.date.timestamp).toISOString().slice(0,10);
         Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
-        upcomingJobs.push(job)
+        upcomingJobs.push(job);
       }
     }
   })
 
   return(
     <ScrollView>
-      <TouchableHighlight onPress={()=> navigate('DaySummary',todaysJobs)}>
+      <TouchableHighlight onPress={()=> navigate('DaySummary',{todaysJobs, today})}>
         <View>
           <TodaySnapshot date={today}  numOfJobs={todaysJobs.length}/>
         </View>
