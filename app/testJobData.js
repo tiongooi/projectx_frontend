@@ -1,8 +1,8 @@
 const testJobData = [
   {
     date: {
-      timestamp: 1501646432335,
-      dateString: '2017-08-02',
+      timestamp: 1501804800000,
+      dateString: '2017-08-04',
       date: 2,
       month: 8,
       year: 2017
@@ -41,7 +41,8 @@ const testJobData = [
   },
   {
     date:{
-        timestamp: 1501446432335,
+        timestamp: 1501718400000,
+        dateString: '2017-08-03',
         date: 1,
         month: 8,
         year: 2017
