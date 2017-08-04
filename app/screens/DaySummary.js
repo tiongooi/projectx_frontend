@@ -11,6 +11,7 @@ const DaySummary = (props) => {
   const {navigate} = props.navigation;
   const {todaysJobs, today} = props.navigation.state.params;
   let hasJob = false;
+  console.log(todaysJobs);
 
   if (todaysJobs.length !== 0) {
     var displayJobsAndEmployees = '';

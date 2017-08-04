@@ -1,11 +1,15 @@
 import React from "react";
 import {ScrollView,TouchableHighlight,View,Text} from "react-native";
 import {connect} from "react-redux";
+import {NavigationActions} from 'react-navigation';
 import TodaySnapshot from "../components/presentation/TodaySnapshot";
 import Calendar from "../components/presentation/Calendar";
 import testData from "../testJobData";
 
+let navigateTo;
+
 const Dashboard = (props) => {
+  navigateTo = props.navigation.navigate.bind(this);
 
   const {navigate} = props.navigation;
   const today = new Date();
@@ -51,16 +55,27 @@ const Dashboard = (props) => {
   )
 };
 
+
 function mapStateToProps(state) {
   return {
-    allSetJobs: testData
+    allSetJobs: state.testData
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    clicked: (day) => console.log(day),
+    clicked: (day, store) => goToDate(day, store)
   }
 }
+
+function goToDate(day, store) {
+  let today = new Date(day.timestamp);
+  let allSetJobs = store.getState().testData;
+  let todaysJobs = allSetJobs.filter((job) => {
+    return day.dateString === job.date.dateString
+  });
+  navigateTo('DaySummary', {todaysJobs, today});
+}
+
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dashboard);
