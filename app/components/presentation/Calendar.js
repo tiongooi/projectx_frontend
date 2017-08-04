@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Text,StyleSheet,View} from 'react-native';
 import {Calendar} from 'react-native-calendars';
+import store from '../../storeConfig';
 
 export default class CalendarComponent extends Component {
   constructor(props) {
@@ -26,11 +27,12 @@ export default class CalendarComponent extends Component {
     );
   }
 
+
   onDayPress(day) {
     this.setState({
       selected: day.dateString
     });
-    this.props.clicked(day);
+    this.props.clicked(day, store);
   }
 
 }
