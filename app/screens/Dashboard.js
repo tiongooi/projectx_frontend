@@ -1,10 +1,9 @@
 import React from "react";
 import {ScrollView,TouchableHighlight,View,Text} from "react-native";
 import {connect} from "react-redux";
-import {NavigationActions} from 'react-navigation';
 import TodaySnapshot from "../components/presentation/TodaySnapshot";
 import Calendar from "../components/presentation/Calendar";
-import testData from "../testJobData";
+import {updateCalendar} from '../actions/calendar';
 
 let navigateTo;
 
@@ -50,7 +49,7 @@ const Dashboard = (props) => {
           <TodaySnapshot date={today}  numOfJobs={todaysJobs.length}/>
         </View>
       </TouchableHighlight>
-        <Calendar markedDates={markedDates} initialSelect={today.getTime()} clicked={props.clicked}/>
+        <Calendar markedDates={markedDates} initialSelect={props.calendarSelected} clicked={props.clicked}/>
     </ScrollView>
   )
 };
@@ -58,7 +57,8 @@ const Dashboard = (props) => {
 
 function mapStateToProps(state) {
   return {
-    allSetJobs: state.testData
+    allSetJobs: state.allSetJobs,
+    calendarSelected: state.calendar.selected
   }
 }
 
@@ -70,10 +70,11 @@ function mapDispatchToProps(dispatch) {
 
 function goToDate(day, store) {
   let today = new Date(day.timestamp);
-  let allSetJobs = store.getState().testData;
+  let allSetJobs = store.getState().allSetJobs;
   let todaysJobs = allSetJobs.filter((job) => {
     return day.dateString === job.date.dateString
   });
+  updateCalendar(today);
   navigateTo('DaySummary', {todaysJobs, today});
 }
 

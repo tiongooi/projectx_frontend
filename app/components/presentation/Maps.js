@@ -4,12 +4,17 @@ import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 
 
 const Maps = (props) => {
-  const location = props.location;
+
+  const coordinates = props.coordinates;
+  const initialRegionCoordinate = Object.assign({},coordinates);
+  initialRegionCoordinate.longitudeDelta = 0.0045;
+  initialRegionCoordinate.latitudeDelta = 0.0045;
+
   setTimeout(goToCoord,500);
 
   function goToCoord() {
-    const mapViewLocation = location;
-    //fit to coordinates -too close 
+    const mapViewLocation = coordinates;
+    //fit to coordinates -too close
     // mapView.fitToCoordinates([mapViewLocation], {
     //   edgePadding:{top:1000, bottom:1000, left:1000, right:1000},
     //   animated: true
@@ -25,10 +30,10 @@ const Maps = (props) => {
       <MapView
         style={styles.map}
         ref={(component)=> {mapView = component}}
-        initialRegion={props.location}
+        initialRegion={initialRegionCoordinate}
        >
         <MapView.Marker
-          coordinate={location}
+          coordinate={coordinates}
           onPress={()=>alert("navigate with maps")}
         />
        </MapView>

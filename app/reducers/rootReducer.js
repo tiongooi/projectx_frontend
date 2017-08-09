@@ -1,8 +1,10 @@
 import {combineReducers} from "redux";
-import testDataReducer from "./testDataReducer";
+import calendar from "./calendar";
+import allSetJobs from "./allSetJobs";
 
 const rootReducer = combineReducers({
-  testData: testDataReducer
+  allSetJobs: allSetJobs,
+  calendar: calendar
 });
 
 module.exports = rootReducer;
