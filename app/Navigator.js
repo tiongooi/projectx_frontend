@@ -6,7 +6,7 @@ import JobDetails from "./screens/JobDetails";
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
   Dashboard: {
-    screen: Dashboard
+    screen: Dashboard,
   },
   DaySummary: {
     screen: DaySummary

@@ -8,47 +8,49 @@ import Avatar from '../components/presentation/Avatar';
 import Maps from '../components/presentation/Maps';
 import testJobObject from '../testJobObject';
 
-const JobDetails = (props) => {
+class JobDetails extends React.Component {
 
-  const navigate = props.navigation;
-  let lastComment;
+  render() {
+    const {navigate} = this.props.navigation;
+    const {job} = this.props.navigation.state.params;
+    let lastComment;
+    if (job.comment.length !== 0) {
+      lastComment = job.comment.pop()
+    }
 
-  if (props.job.comment.length !== 0) {
-    lastComment = props.job.comment.pop()
-  }
-
-  return (
-    <ScrollView>
-      <Maps location={props.location} />
-      <JobCard client={props.job.client} title={props.job.title}/>
-      <View>
+    return(
+      <ScrollView>
+        <Maps coordinates={job.client.location.coordinates} />
+        <JobCard client={job.client.name} title={job.title}/>
+        <View>
+          {
+            job.employee.map((employee,index) => {
+              return <Avatar avatar={employee.avatar} name={employee.fName} key={index} />
+            })
+          }
+          <TouchableHighlight onPress={this.props.click}>
+            <View><Avatar avatar={"Quick Assign"} name={"Quick Assign"} /></View>
+          </TouchableHighlight>
+        </View>
         {
-          props.job.employee.map((employee,index) => {
-            return <Avatar avatar={employee.avatar} name={employee.fName} key={index} />
+          (lastComment ?
+            <View>
+              <View style={styles.testDiv}></View>
+              <Text>{lastComment.content}</Text>
+            </View>
+            :null)
+        }
+        <TouchableHighlight onPress={this.props.click}>
+          <View><Text>Edit Task</Text></View>
+        </TouchableHighlight>
+        {
+          job.task.map((task,index) => {
+            return <TaskCard task={task} key={index} />
           })
         }
-        <TouchableHighlight onPress={props.click}>
-          <View><Avatar avatar={"Quick Assign"} name={"Quick Assign"} /></View>
-        </TouchableHighlight>
-      </View>
-      {
-        (lastComment ?
-          <View>
-            <View style={styles.testDiv}></View>
-            <Text>{lastComment.content}</Text>
-          </View>
-          :null)
-      }
-      <TouchableHighlight onPress={props.click}>
-        <View><Text>Edit Task</Text></View>
-      </TouchableHighlight>
-      {
-        props.job.task.map((task,index) => {
-          return <TaskCard task={task} key={index} />
-        })
-      }
-    </ScrollView>
-  )
+      </ScrollView>
+    )
+  }
 };
 
 function mapStateToProps(state) {
@@ -78,4 +80,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = connect(mapStateToProps,mapDispatchToProps)(JobDetails);
+export default connect(mapStateToProps,mapDispatchToProps)(JobDetails);

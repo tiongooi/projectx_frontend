@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {Text,StyleSheet,View} from 'react-native';
+import {connect} from 'react-redux';
 import {Calendar} from 'react-native-calendars';
 import store from '../../storeConfig';
 
-export default class CalendarComponent extends Component {
+class CalendarComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selected: this.props.initialSelect,
-    };
     this.onDayPress = this.onDayPress.bind(this);
   }
 
@@ -19,7 +17,7 @@ export default class CalendarComponent extends Component {
           onDayPress={this.onDayPress}
           style={styles.calendar}
           hideExtraDays
-          selected={[this.state.selected]}
+          selected={[this.props.calendarSelected]}
           markedDates={this.props.markedDates}
           theme={theme}
         />
@@ -29,12 +27,15 @@ export default class CalendarComponent extends Component {
 
 
   onDayPress(day) {
-    this.setState({
-      selected: day.dateString
-    });
     this.props.clicked(day, store);
   }
 
+}
+
+mapStateToProps = (state) => {
+  return {
+    calendarSelected: state.calendar.selected
+  }
 }
 
 
@@ -72,3 +73,5 @@ const theme = {
     textMonthFontSize: 18,
     textDayFontSize: 17
   }
+
+  export default connect(mapStateToProps)(CalendarComponent);
