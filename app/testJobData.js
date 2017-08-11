@@ -1,8 +1,9 @@
-const testJobData = [
+exports.testJobData = [
   {
+    id: '0001',
     date: {
-      timestamp: 1501918400000,
-      dateString: '2017-08-05',
+      timestamp: 1502323200000,
+      dateString: '2017-08-10',
       date: 2,
       month: 8,
       year: 2017
@@ -14,8 +15,8 @@ const testJobData = [
         street: '34 Bunn St',
         suburb: 'Pyrmont',
         coordinates: {
-          // longitude: ‎151.209900,
-          // latitude: -33.865143
+          longitude: 115.857048,
+          latitude: -31.953512
         }
       }
     },
@@ -42,6 +43,7 @@ const testJobData = [
     ]
   },
   {
+    id: '0002',
     date: {
       timestamp: 1501718400000,
       dateString: '2017-08-03',
@@ -84,6 +86,7 @@ const testJobData = [
     ]
   },
   {
+    id: '0003',
     date:{
         timestamp: 1501718400000,
         dateString: '2017-08-03',
@@ -125,6 +128,4 @@ const testJobData = [
       }
     ]
   },
-]
-
-export default testJobData;
+];

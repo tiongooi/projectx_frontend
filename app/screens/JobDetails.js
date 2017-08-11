@@ -6,16 +6,24 @@ import TaskCard from '../components/presentation/TaskCard';
 import JobCard from '../components/presentation/JobCard';
 import Avatar from '../components/presentation/Avatar';
 import Maps from '../components/presentation/Maps';
-import testJobObject from '../testJobObject';
+import RemoveJobButton from '../components/presentation/RemoveJobButton';
 
 class JobDetails extends React.Component {
+
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Job',
+      headerRight: ( <RemoveJobButton jobId={navigation.state.params.job.id} navigation={{navigation}}/> ),
+    }
+  }
 
   render() {
     const {navigate} = this.props.navigation;
     const {job} = this.props.navigation.state.params;
     let lastComment;
     if (job.comment.length !== 0) {
-      lastComment = job.comment.pop()
+      let comments = job.comment.slice();
+      lastComment = comments.pop();
     }
 
     return(
@@ -29,7 +37,7 @@ class JobDetails extends React.Component {
             })
           }
           <TouchableHighlight onPress={this.props.click}>
-            <View><Avatar avatar={"Quick Assign"} name={"Quick Assign"} /></View>
+            <View><Avatar avatar={"Quick"} name={"Assign"} /></View>
           </TouchableHighlight>
         </View>
         {
@@ -55,15 +63,9 @@ class JobDetails extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    job: testJobObject,
-    location: {
-      latitude:-33.865143,
-      longitude:151.209900,
-      latitudeDelta: 0.0040,
-      longitudeDelta: 0.0040
+    state
     }
   }
-}
 
 function mapDispatchToProps(dispatch) {
   return {

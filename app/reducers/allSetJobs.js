@@ -1,9 +1,11 @@
-import testData from '../testJobData';
-import {FETCHING_ALL_SET_JOBS, FETCHING_ALL_SET_JOBS_COMPLETE, FETCHING_ALL_SET_JOBS_FAIL} from '../constants';
+import initialState from '../initialState';
+import {FETCHING_ALL_SET_JOBS,
+        FETCHING_ALL_SET_JOBS_COMPLETE,
+        FETCHING_ALL_SET_JOBS_FAIL,
+        UPDATE_SET_JOBS
+        } from '../constants';
 
-const initialState = testData;
-
-const allSetJobs = (state = initialState, action) => {
+const allSetJobs = (state = initialState.allSetJobs, action) => {
   switch(action.type) {
     case FETCHING_ALL_SET_JOBS: {
       return {
@@ -23,6 +25,12 @@ const allSetJobs = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false
+      }
+    }
+    case UPDATE_SET_JOBS: {
+      return {
+        ...state,
+        jobs: action.payload
       }
     }
     default: return state

@@ -122,6 +122,7 @@ class DaySummary extends Component {
           today: newDay,
         })
       };
+      this.props.updateSelected(newDay);
     }
 
     prevDay() {
@@ -156,7 +157,7 @@ class DaySummary extends Component {
 
 mapStateToProps = (state) => {
   return {
-    allSetJobs: state.allSetJobs
+    allSetJobs: state.allSetJobs.jobs
   }
 };
 
