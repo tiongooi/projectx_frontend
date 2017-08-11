@@ -1,4 +1,6 @@
+import React from 'react';
 import {DrawerNavigator, StackNavigator} from "react-navigation";
+import {Button} from 'react-native';
 import Dashboard from "./screens/Dashboard";
 import DaySummary from "./screens/DaySummary";
 import JobDetails from "./screens/JobDetails";
@@ -7,9 +9,15 @@ import JobDetails from "./screens/JobDetails";
 const DashboardStack = StackNavigator({
   Dashboard: {
     screen: Dashboard,
+    navigationOptions: {
+      title: 'Dashboard',
+    }
   },
   DaySummary: {
-    screen: DaySummary
+    screen: DaySummary,
+    navigationOptions: {
+      title: 'Summary',
+    }
   },
   JobDetails: {
     screen: JobDetails
