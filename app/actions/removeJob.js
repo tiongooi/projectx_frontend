@@ -4,10 +4,15 @@ import {
   REMOVE_JOB_FAIL,
   UPDATE_SET_JOBS,
 } from '../constants';
-import {testJobData} from '../testJobData';
+import {testJobData} from '../testJobData2';
 
-exports.removeJob = (jobId,navigation) => {
+exports.removeJob = (jobId,NavigationActions,navigation,screenKey) => {
   return (dispatch) => {
+
+    const backAction = NavigationActions.back({
+      key: navigation.state.key
+    });
+
     dispatch(removingJob());
     //fetch();
     let res = {
@@ -16,8 +21,8 @@ exports.removeJob = (jobId,navigation) => {
     };
     if (res.message === 'ok') {
       dispatch(removeSuccess(res.message))
-      dispatch(updateSetJobs(res.data))
-      navigation.goBack();
+      dispatch(updateSetJobs(res.data));
+      navigation.dispatch(backAction);
     } else {
       dispatch(removeFail(res.message))
     }

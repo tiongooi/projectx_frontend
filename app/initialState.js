@@ -4,7 +4,8 @@ const initialState = {
   allSetJobs: {
     isFetching: false,
     message: null,
-    jobs: testData.testJobData
+    jobs: testData.testJobData,
+    daySummaryScreenKey: null
   },
   calendar: {
     selected: new Date().toString()

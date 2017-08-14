@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, View, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {removeJob} from '../../actions/removeJob';
+import {NavigationActions} from 'react-navigation';
 
 class RemoveJobButton extends React.Component {
   render() {
@@ -9,7 +10,7 @@ class RemoveJobButton extends React.Component {
       <Button
       title={'Remove'}
       color={'#1578FB'}
-      onPress={() => this.props.remove(this.props.jobId, this.props.navigation.navigation)}
+      onPress={() => this.props.remove(this.props.jobId,NavigationActions,this.props.navigation.navigation, this.props.screenKey)}
       />
     )
   }
@@ -17,13 +18,13 @@ class RemoveJobButton extends React.Component {
 
 mapStateToProps = (state) => {
   return {
-    state
+    screenKey: state.allSetJobs.daySummaryScreenKey
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
-    remove: (jobId,navigation) => dispatch(removeJob(jobId,navigation))
+    remove: (jobId,NavigationActions,navigation,screenKey) => dispatch(removeJob(jobId,NavigationActions,navigation,screenKey))
   }
 }
 
