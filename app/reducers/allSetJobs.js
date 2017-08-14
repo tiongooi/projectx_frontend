@@ -2,7 +2,8 @@ import initialState from '../initialState';
 import {FETCHING_ALL_SET_JOBS,
         FETCHING_ALL_SET_JOBS_COMPLETE,
         FETCHING_ALL_SET_JOBS_FAIL,
-        UPDATE_SET_JOBS
+        UPDATE_SET_JOBS,
+        UPDATE_SCREEN_KEY
         } from '../constants';
 
 const allSetJobs = (state = initialState.allSetJobs, action) => {
@@ -31,6 +32,12 @@ const allSetJobs = (state = initialState.allSetJobs, action) => {
       return {
         ...state,
         jobs: action.payload
+      }
+    }
+    case UPDATE_SCREEN_KEY: {
+      return {
+        ...state,
+        daySummaryScreenKey: action.payload
       }
     }
     default: return state
