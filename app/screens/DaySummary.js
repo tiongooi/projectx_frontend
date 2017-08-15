@@ -16,6 +16,13 @@ class DaySummary extends Component {
     this.prevDay = this.prevDay.bind(this);
   }
 
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Summary',
+      headerRight: (<Text>Add</Text>)
+    }
+  }
+
   render() {
     let todaysJobs = this.props.allSetJobs.filter((job) => {
       return new Date(this.props.calendarSelected).toISOString().slice(0,10) === job.date.dateString

@@ -1,12 +1,16 @@
 import {combineReducers} from "redux";
-import calendar from "./calendar";
-import allSetJobs from "./allSetJobs";
-import removeJob from "./removeJob";
+import calendarReducer from "./calendar";
+import allSetJobsReducer from "./allSetJobs";
+import removeJobReducer from "./removeJob";
+import employeesReducer from "./employees";
+import clientsReducer from "./clients";
 
 const rootReducer = combineReducers({
-  allSetJobs: allSetJobs,
-  calendar: calendar,
-  removeJob: removeJob
+  allSetJobs: allSetJobsReducer,
+  calendar: calendarReducer,
+  removeJob: removeJobReducer,
+  employees: employeesReducer,
+  clients: clientsReducer
 });
 
 module.exports = rootReducer;
