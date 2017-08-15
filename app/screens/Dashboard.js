@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import TodaySnapshot from "../components/presentation/TodaySnapshot";
 import Calendar from "../components/presentation/Calendar";
 import {updateCalendar} from "../actions/calendar";
+import store from '../storeConfig';
 
 let navigateTo;
 
@@ -13,6 +14,7 @@ const Dashboard = (props) => {
 
   const {navigate} = props.navigation;
   const today = new Date();
+        today.dateString = today.toISOString().slice(0,10);
   const todaysDateString = new Date(today).toISOString().slice(0,10);
   const markedDatesDescriptor = {
     value: {marked:true},
@@ -45,7 +47,7 @@ const Dashboard = (props) => {
 
   return(
     <ScrollView>
-      <TouchableHighlight onPress={()=> navigate('DaySummary',{todaysJobs, today})}>
+      <TouchableHighlight onPress={()=> props.clicked(today,store)}>
         <View>
           <TodaySnapshot date={today}  numOfJobs={todaysJobs.length}/>
         </View>

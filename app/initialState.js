@@ -1,10 +1,12 @@
-import testData from './testJobData';
+import {testJobData} from './testJobData';
+import {employees} from './testEmployeeData';
+import {clients} from './testClientData';
 
 const initialState = {
   allSetJobs: {
     isFetching: false,
     message: null,
-    jobs: testData.testJobData,
+    jobs: testJobData,
     daySummaryScreenKey: null
   },
   calendar: {
@@ -13,6 +15,18 @@ const initialState = {
   removeJob: {
     isRemoving: false,
     message: null,
+  },
+  employees: {
+    isFetching: false,
+    isRemoving: false,
+    message: null,
+    allEmployees: employees
+  },
+  clients: {
+    isFetching: false,
+    isRemoving: false,
+    message: null,
+    allClients: clients
   }
 };
 
