@@ -4,57 +4,63 @@ import {connect} from "react-redux";
 import TodaySnapshot from "../components/presentation/TodaySnapshot";
 import Calendar from "../components/presentation/Calendar";
 import {updateCalendar} from "../actions/calendar";
+import {fetchJobs} from "../actions/allSetJobs";
 import store from '../storeConfig';
 
 let navigateTo;
 
-const Dashboard = (props) => {
+class Dashboard extends React.Component {
 
-  navigateTo = props.navigation.navigate.bind(this);
-
-  const {navigate} = props.navigation;
-  const today = new Date();
-        today.dateString = today.toISOString().slice(0,10);
-  const todaysDateString = new Date(today).toISOString().slice(0,10);
-  const markedDatesDescriptor = {
-    value: {marked:true},
-    writable:true,
-    enumerable:true,
-    configurable:true
+  componentWillMount() {
+    this.props.fetchJobs()
   }
-  let todaysJobs = [];
-  let passedJobs = [];
-  let upcomingJobs = [];
-  let markedDates = {};
+   
+  render() {
+    navigateTo = this.props.navigation.navigate.bind(this);
 
-  props.allSetJobs.map((job) => {
-    if (todaysDateString === job.date.dateString) {
-      let property = new Date(job.date.timestamp).toISOString().slice(0,10);
-      Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
-      todaysJobs.push(job);
-    } else {
-      if (today.getTime() > job.date.timestamp) {
-        let property = new Date(job.date.timestamp).toISOString().slice(0,10);
-        Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
-        passedJobs.push(job);
-      } else if (today.getTime() < job.date.timestamp) {
-        let property = new Date(job.date.timestamp).toISOString().slice(0,10);
-        Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
-        upcomingJobs.push(job);
-      }
+    const {navigate} = this.props.navigation;
+    const today = new Date();
+          today.dateString = today.toISOString().slice(0,10);
+    const todaysDateString = new Date(today).toISOString().slice(0,10);
+    const markedDatesDescriptor = {
+      value: {marked:true},
+      writable:true,
+      enumerable:true,
+      configurable:true
     }
-  })
+    let todaysJobs = [];
+    let passedJobs = [];
+    let upcomingJobs = [];
+    let markedDates = {};
 
-  return(
-    <ScrollView>
-      <TouchableHighlight onPress={()=> props.clicked(today,store)}>
-        <View>
-          <TodaySnapshot date={today}  numOfJobs={todaysJobs.length}/>
-        </View>
-      </TouchableHighlight>
-        <Calendar markedDates={markedDates} initialSelect={props.calendarSelected} clicked={props.clicked}/>
-    </ScrollView>
-  )
+    this.props.allSetJobs.map((job) => {
+      if (todaysDateString === job.date.dateString) {
+        let property = new Date(job.date.timestamp).toISOString().slice(0,10);
+        Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
+        todaysJobs.push(job);
+      } else {
+        if (today.getTime() > job.date.timestamp) {
+          let property = new Date(job.date.timestamp).toISOString().slice(0,10);
+          Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
+          passedJobs.push(job);
+        } else if (today.getTime() < job.date.timestamp) {
+          let property = new Date(job.date.timestamp).toISOString().slice(0,10);
+          Object.defineProperty(markedDates, property.toString(), markedDatesDescriptor);
+          upcomingJobs.push(job);
+        }
+      }
+    })
+    return (
+      <ScrollView>
+        <TouchableHighlight onPress={()=> this.props.clicked(today,store)}>
+          <View>
+            <TodaySnapshot date={today}  numOfJobs={todaysJobs.length}/>
+          </View>
+        </TouchableHighlight>
+          <Calendar markedDates={markedDates} initialSelect={this.props.calendarSelected} clicked={this.props.clicked}/>
+      </ScrollView>
+    )
+  }
 };
 
 
@@ -67,7 +73,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    clicked: (day, store) => goToDate(day, store)
+    clicked: (day, store) => goToDate(day, store),
+    fetchJobs: () => dispatch(fetchJobs())
   }
 }
 

@@ -7,7 +7,27 @@ import JobDetails from "./screens/JobDetails";
 import Employees from "./screens/Employees";
 import EmployeeSummary from "./screens/EmployeeSummary";
 import Clients from "./screens/Clients";
+import ClientSummary from "./screens/ClientSummary";
+import SelectTemplate from "./screens/SelectTemplate";
 
+//new set job stack
+const NewSetJobStack = StackNavigator({
+  SelectTemplate: {
+    screen: SelectTemplate,
+    navigationOptions: {
+      title: 'New job'
+    }
+  },
+  // SelectClient: {
+  //   screen: SelectClient
+  // },
+  // SelectTask: {
+  //   screen: SelectTask
+  // },
+  // SelectEmployee: {
+  //   screen: SelectEmployee
+  // }, 
+});
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
   Dashboard: {
@@ -23,6 +43,21 @@ const DashboardStack = StackNavigator({
     screen: JobDetails
   }
 });
+//test stack MODAL navigator
+const ModalStack = StackNavigator({
+  Dashboard: {
+    screen: DashboardStack,
+    navigationOptions: {
+      title: 'Dashboard'
+    }
+  },
+  NewSetJob: {
+    screen: NewSetJobStack
+  }
+},{
+  mode: 'modal',
+  headerMode: 'none'
+})
 //employees stack navigator
 const EmployeeStack = StackNavigator({
   Employees: {
@@ -46,18 +81,18 @@ const ClientStack = StackNavigator({
       title: 'Clients'
     }
   },
-  // ClientSummary: {
-  //   screen: ClientSummary,
-  //   navigationOptions: {
-  //     title: 'Client Summary'
-  //   }
-  // }
+  ClientSummary: {
+    screen: ClientSummary,
+    navigationOptions: {
+      title: 'Client'
+    }
+  }
 });
 
 //root navigator
 const Navigator = DrawerNavigator({
   Dashboard: {
-    screen: DashboardStack,
+    screen: ModalStack,
     navigationOptions: {
       drawerLabel: 'Dashboard'
     }
