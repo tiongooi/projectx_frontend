@@ -5,12 +5,18 @@ import {
         UPDATE_SCREEN_KEY
         } from '../constants';
 
-exports.fetchJob = () => {
+import {testJobData} from '../testJobData';
+
+exports.fetchJobs = () => {
   return (dispatch) => {
-    dispatch(gettingJobs());
-    //fetch()...api
-    //response.json
-    dispatch(gotJobs(res));
+    dispatch(gettingJobs())
+    //fetch()...below is for testing only
+    const res = {message: 'ok', data:testJobData}
+    if (res.message == 'ok') {
+      dispatch(gotJobs(res.data))
+    } else {
+      dispatch(getJobsFailed())
+    }
   }
 }
 
@@ -26,9 +32,10 @@ const gettingJobs = () => {
   }
 }
 
-const gotJobs = () => {
+const gotJobs = (data) => {
   return {
-    type: FETCHING_ALL_SET_JOBS_COMPLETE
+    type: FETCHING_ALL_SET_JOBS_COMPLETE,
+    payload: data
   }
 }
 

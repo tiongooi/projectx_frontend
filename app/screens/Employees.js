@@ -42,7 +42,7 @@ mapStateToProps = (state) => {
 mapDispatchToProps = (dispatch) => {
   return {
     clicked: () => alert('clicked'),
-    fetchAllEmployees: () => fetchEmployees()
+    fetchAllEmployees: () => dispatch(fetchEmployees())
   }
 }
 

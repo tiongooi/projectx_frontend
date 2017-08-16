@@ -6,6 +6,7 @@ import JobCard from '../components/presentation/JobCard';
 import Avatar from '../components/presentation/Avatar';
 import {updateCalendar} from '../actions/calendar';
 import {updateScreenKey} from '../actions/allSetJobs';
+import AddButton from '../components/presentation/AddButton';
 import store from '../storeConfig';
 
 class DaySummary extends Component {
@@ -19,7 +20,7 @@ class DaySummary extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Summary',
-      headerRight: (<Text>Add</Text>)
+      headerRight: (<AddButton navigation={navigation} />)
     }
   }
 

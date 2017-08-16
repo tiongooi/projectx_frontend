@@ -12,14 +12,13 @@ const allSetJobs = (state = initialState.allSetJobs, action) => {
       return {
         ...state,
         isFetching: true,
-        allSetJobs: null
       }
     }
     case FETCHING_ALL_SET_JOBS_COMPLETE: {
       return {
         ...state,
         isFetching: false,
-        allSetJobs: action.payload
+        jobs: action.payload
       }
     }
     case FETCHING_ALL_SET_JOBS_FAIL: {
