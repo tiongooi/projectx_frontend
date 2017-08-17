@@ -5,6 +5,9 @@ import TodaySnapshot from "../components/presentation/TodaySnapshot";
 import Calendar from "../components/presentation/Calendar";
 import {updateCalendar} from "../actions/calendar";
 import {fetchJobs} from "../actions/allSetJobs";
+import {fetchEmployees} from "../actions/employees";
+import {fetchClients} from "../actions/clients";
+import {fetchTasks} from "../actions/tasks";
 import store from '../storeConfig';
 
 let navigateTo;
@@ -14,7 +17,13 @@ class Dashboard extends React.Component {
   componentWillMount() {
     this.props.fetchJobs()
   }
-   
+
+  componentDidMount() {
+    this.props.fetchEmployees()
+    this.props.fetchClients()
+    this.props.fetchTasks()
+  }
+
   render() {
     navigateTo = this.props.navigation.navigate.bind(this);
 
@@ -74,7 +83,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     clicked: (day, store) => goToDate(day, store),
-    fetchJobs: () => dispatch(fetchJobs())
+    fetchJobs: () => dispatch(fetchJobs()),
+    fetchEmployees: () => dispatch(fetchEmployees()),
+    fetchClients: () => dispatch(fetchClients()),
+    fetchTasks: () => dispatch(fetchTasks())
   }
 }
 
