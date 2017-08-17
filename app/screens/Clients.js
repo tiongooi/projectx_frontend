@@ -23,7 +23,13 @@ class Clients extends Component {
           {
             hasClient ? (
               this.props.allClients.map((client, index) => {
-                return <ClientCard client={client} navigate={navigate} key={index} />
+              return <View key={index}>
+                <TouchableHighlight onPress={() => navigate('ClientSummary', {client})}>
+                  <View>
+                   <ClientCard client={client} key={index} />
+                  </View>
+                </TouchableHighlight>
+              </View>
               })
             ):(
               <Text>You do not have any client</Text>

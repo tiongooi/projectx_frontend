@@ -1,0 +1,54 @@
+import {
+  SET_NEW_JOB_CLIENT,
+  SET_NEW_JOB_TASK,
+  SET_NEW_JOB_EMPLOYEE,
+  INITIATING_NEW_JOB,
+  INITIATE_NEW_JOB_SUCCESS,
+  INITIATE_NEW_JOB_FAIL
+} from '../constants';
+
+import initialState from '../initialState';
+
+const newJobReducer = (state = initialState.newJob, action) => {
+  switch(action.type) {
+    case SET_NEW_JOB_CLIENT: {
+      return {
+        ...state,
+        client: action.payload
+      }
+    }
+    case SET_NEW_JOB_TASK: {
+      return {
+        ...state,
+        task: [...state.task, action.payload]
+      }
+    }
+    case SET_NEW_JOB_EMPLOYEE: {
+      return {
+        ...state,
+        employee: push(action.payload)
+      }
+    }
+    case INITIATING_NEW_JOB: {
+      return {
+        ...state,
+        isInitiating: true
+      }
+    }
+    case INITIATE_NEW_JOB_SUCCESS: {
+      return {
+        ...state,
+        isInitiating: false
+      }
+    }
+    case INITIATE_NEW_JOB_FAIL: {
+      return {
+        ...state,
+        isInitiating: false
+      }
+    }
+    default: return state
+  }
+}
+
+export default newJobReducer;

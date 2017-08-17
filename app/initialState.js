@@ -11,19 +11,35 @@ const initialState = {
   },
   removeJob: {
     isRemoving: false,
-    message: null,
+    message: '',
   },
   employees: {
     isFetching: false,
     isRemoving: false,
-    message: null,
+    message: '',
     allEmployees: []
   },
   clients: {
     isFetching: false,
     isRemoving: false,
-    message: null,
+    message: '',
     allClients: []
+  },
+  tasks: {
+    isFetching: false,
+    isRemoving: false,
+    isCreating: false,
+    message: '',
+    allTasks: []
+  },
+  newJob: {
+    isInitializing: false,
+    message: '',
+    client: {},
+    task: [],
+    employee: [],
+    comment: [],
+    title: ''
   }
 };
 

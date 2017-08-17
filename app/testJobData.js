@@ -22,9 +22,9 @@ exports.testJobData = [
     },
     title: 'month end maintenence',
     task: [
-      {content:'sweep the floor'},
-      {content:'eat your munchies'},
-      {content:'paint the wall'}
+      {id: 'x1', content:'sweep the floor'},
+      {id: 'x2', content:'eat your munchies'},
+      {id: 'x3', content:'paint the wall'}
     ],
     comment: [
       {content: 'dont forget to fix the roof', user: 'John'}
@@ -65,9 +65,9 @@ exports.testJobData = [
     },
     title: 'month end maintenence',
     task: [
-      {content:'sweep the floor'},
-      {content:'eat your munchies'},
-      {content:'paint the wall'}
+      {id: 'x4', content:'sweep the floor'},
+      {id: 'x5', content:'eat your munchies'},
+      {id: 'x6', content:'paint the wall'}
     ],
     comment: [
       {content: 'dont forget to fix the roof', user: 'John'}
@@ -108,9 +108,9 @@ exports.testJobData = [
     },
     title: 'month end maintenence',
     task: [
-      {content:'sweep the floor'},
-      {content:'eat your munchies'},
-      {content:'paint the wall'}
+      {id: 'x7', content:'sweep the floor'},
+      {id: 'x8', content:'eat your munchies'},
+      {id: 'x9', content:'paint the wall'}
     ],
     comment: [
       {content: 'dont forget to fix the roof', user: 'John'}

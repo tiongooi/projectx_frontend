@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View,Text,TouchableOpacity,ScrollView} from 'react-native';
+import {View,Text,TouchableHighlight,ScrollView} from 'react-native';
 import {fetchEmployees} from '../actions/employees';
 import EmployeeCard from '../components/presentation/EmployeeCard';
 
@@ -23,7 +23,13 @@ class Employees extends Component {
           {
             hasEmployee ? (
               this.props.allEmployees.map((employee, index) => {
-                return <EmployeeCard employee={employee} key={index} navigate={navigate} />
+                return <View key={index}>
+                  <TouchableHighlight onPress={ () => navigate('EmployeeSummary',{employee}) }>
+                    <View>
+                      <EmployeeCard employee={employee} key={index}/>
+                    </View>
+                  </TouchableHighlight>
+                </View>
               })
             ):(<Text>You do not have any employee yet</Text>)
           }
