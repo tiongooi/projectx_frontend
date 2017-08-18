@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Text, View, TouchableHighlight, ScrollView} from 'react-native';
-import TaskCard from '../components/presentation/TaskCard';
+import TaskCardSelectable from '../components/presentation/TaskCardSelectable';
 
 class SelectTask extends Component {
   static navigationOptions = ({navigation}) => {
@@ -18,20 +18,14 @@ class SelectTask extends Component {
       <View>
         <View>
           <Text>Search bar goes here</Text>
+          <Text>{this.props.newJobTask.length}</Text>
         </View>
         {
           hasTask ? (
             <ScrollView>
               {
                 this.props.allTasks.map((task,index) => {
-                  //set up onPress Task.Selected=true, test reducer assign
-                  return <View key={index}>
-                    <TouchableHighlight onPress={()=>alert('booyah')}>
-                      <View>
-                        <TaskCard task={task} key={index}/>
-                      </View>
-                    </TouchableHighlight>
-                  </View>
+                  return <TaskCardSelectable task={task} key={index} />
                 })
               }
             </ScrollView>
@@ -46,13 +40,14 @@ class SelectTask extends Component {
 
 mapStateToProps = (state) => {
   return {
-    allTasks: state.tasks.allTasks
+    allTasks: state.tasks.allTasks,
+    newJobTask: state.newJob.task
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
-    clicked: () => alert('clicked')
+    clicked: () => alert('clicked'),
   }
 }
 

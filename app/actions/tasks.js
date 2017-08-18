@@ -7,7 +7,7 @@ import {
   CREATE_NEW_TASK_FAIL,
   REMOVING_TASK,
   REMOVE_TASK_SUCCESS,
-  REMOVE_TASK_FAIL
+  REMOVE_TASK_FAIL,
 } from '../constants';
 
 import {testTaskData} from '../testTaskData';

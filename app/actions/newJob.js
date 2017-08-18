@@ -1,6 +1,7 @@
 import {
     SET_NEW_JOB_CLIENT,
     SET_NEW_JOB_TASK,
+    UNSET_NEW_JOB_TASK,
     SET_NEW_JOB_EMPLOYEE,
     INITIATING_NEW_JOB,
     INITIATE_NEW_JOB_SUCCESS,
@@ -16,11 +17,20 @@ exports.setClient = (client,navigation) => {
   }
 }
 
-exports.setTask = () => {
+exports.setTask = (task,newJobTask) => {
   return (dispatch) => {
-    dispatch(settingTask())
+    if (newJobTask.indexOf(task) < 0) {
+      //not found, so we add it
+      dispatch(settingTask(task))
+    } else {
+      //found, so we delete it
+      let spliceIndex = newJobTask.indexOf(task)
+      newJobTask.splice(spliceIndex,1)
+      dispatch(unsettingTask(newJobTask))
+    }
   }
 }
+
 
 exports.setEmployee = () => {
   return (dispatch) => {
@@ -48,9 +58,17 @@ const settingClient = (client) => {
   }
 }
 
-const settingTask = () => {
+const settingTask = (task) => {
   return {
-    type: SET_NEW_JOB_TASK
+    type: SET_NEW_JOB_TASK,
+    payload: task
+  }
+}
+
+const unsettingTask = (newJobTask) => {
+  return {
+    type: UNSET_NEW_JOB_TASK,
+    payload: newJobTask
   }
 }
 
