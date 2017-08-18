@@ -1,6 +1,7 @@
 import {
   SET_NEW_JOB_CLIENT,
   SET_NEW_JOB_TASK,
+  UNSET_NEW_JOB_TASK,
   SET_NEW_JOB_EMPLOYEE,
   INITIATING_NEW_JOB,
   INITIATE_NEW_JOB_SUCCESS,
@@ -18,9 +19,17 @@ const newJobReducer = (state = initialState.newJob, action) => {
       }
     }
     case SET_NEW_JOB_TASK: {
+      let {task} = state
       return {
         ...state,
-        task: [...state.task, action.payload]
+        task: [...task, action.payload]
+      }
+    }
+    case UNSET_NEW_JOB_TASK: {
+      let {payload} = action
+      return {
+        ...state,
+        task: [...payload]
       }
     }
     case SET_NEW_JOB_EMPLOYEE: {
