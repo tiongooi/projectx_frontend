@@ -3,6 +3,7 @@ import {
   SET_NEW_JOB_TASK,
   UNSET_NEW_JOB_TASK,
   SET_NEW_JOB_EMPLOYEE,
+  UNSET_NEW_JOB_EMPLOYEE,
   INITIATING_NEW_JOB,
   INITIATE_NEW_JOB_SUCCESS,
   INITIATE_NEW_JOB_FAIL
@@ -19,23 +20,27 @@ const newJobReducer = (state = initialState.newJob, action) => {
       }
     }
     case SET_NEW_JOB_TASK: {
-      let {task} = state
       return {
         ...state,
-        task: [...task, action.payload]
+        task: [...state.task, action.payload]
       }
     }
     case UNSET_NEW_JOB_TASK: {
-      let {payload} = action
       return {
         ...state,
-        task: [...payload]
+        task: [...action.payload]
       }
     }
     case SET_NEW_JOB_EMPLOYEE: {
       return {
         ...state,
-        employee: push(action.payload)
+        employee: [...state.employee, action.payload]
+      }
+    }
+    case UNSET_NEW_JOB_EMPLOYEE: {
+      return {
+        ...state,
+        employee: [...action.payload]
       }
     }
     case INITIATING_NEW_JOB: {

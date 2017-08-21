@@ -18,8 +18,8 @@ class SelectTask extends Component {
       <View>
         <View>
           <Text>Search bar goes here</Text>
-          <Text>{this.props.newJobTask.length}</Text>
         </View>
+        <TouchableHighlight onPress={()=> this.props.navigation.navigate('SelectEmployee')}><View><Text>NEXT</Text></View></TouchableHighlight>
         {
           hasTask ? (
             <ScrollView>

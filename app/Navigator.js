@@ -11,6 +11,7 @@ import ClientSummary from "./screens/ClientSummary";
 import SelectTemplate from "./screens/SelectTemplate";
 import SelectClient from "./screens/SelectClient";
 import SelectTask from "./screens/SelectTask";
+import SelectEmployee from "./screens/SelectEmployee";
 
 //new set job stack
 const NewSetJobStack = StackNavigator({
@@ -23,9 +24,9 @@ const NewSetJobStack = StackNavigator({
   SelectTask: {
     screen: SelectTask
   },
-  // SelectEmployee: {
-  //   screen: SelectEmployee
-  // },
+  SelectEmployee: {
+    screen: SelectEmployee
+  },
 });
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
