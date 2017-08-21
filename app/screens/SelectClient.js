@@ -49,7 +49,7 @@ class SelectClient extends Component {
 
 mapStateToProps = (state) => {
   return {
-    allClients: state.clients.allClients
+    allClients: state.clients.allClients 
   }
 }
 

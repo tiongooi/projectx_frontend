@@ -3,6 +3,7 @@ import {
     SET_NEW_JOB_TASK,
     UNSET_NEW_JOB_TASK,
     SET_NEW_JOB_EMPLOYEE,
+    UNSET_NEW_JOB_EMPLOYEE,
     INITIATING_NEW_JOB,
     INITIATE_NEW_JOB_SUCCESS,
     INITIATE_NEW_JOB_FAIL
@@ -32,9 +33,17 @@ exports.setTask = (task,newJobTask) => {
 }
 
 
-exports.setEmployee = () => {
+exports.setEmployee = (employee,newJobEmployee) => {
   return (dispatch) => {
-    dispatch(settingEmployee())
+    if (newJobEmployee.indexOf(employee) < 0) {
+      //not found, so we add it
+      dispatch(settingEmployee(employee))
+    } else {
+      //found, so we remove it
+      let spliceIndex = newJobEmployee.indexOf(employee)
+      newJobEmployee.splice(spliceIndex,1)
+      dispatch(unsettingEmployee(newJobEmployee))
+    }
   }
 }
 
@@ -72,9 +81,17 @@ const unsettingTask = (newJobTask) => {
   }
 }
 
-const settingEmployee = () => {
+const settingEmployee = (employee) => {
   return {
-    type: SET_NEW_JOB_EMPLOYEE
+    type: SET_NEW_JOB_EMPLOYEE,
+    payload: employee
+  }
+}
+
+const unsettingEmployee = (newJobEmployee) => {
+  return {
+    type: UNSET_NEW_JOB_EMPLOYEE,
+    payload: newJobEmployee
   }
 }
 
