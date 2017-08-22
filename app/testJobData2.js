@@ -52,11 +52,20 @@ exports.testJobData = [
       year: 2017
     },
     client: {
-      name: 'johns backyard',
-      contact: 1223534645,
+      id: '111',
+      selected: false,
+      propertyName: 'Johns Mosman Garden',
+      fName: 'John',
+      lName: 'Smith',
+      email: 'js@javascript.com',
+      mobile: '0876578897',
+      avatar: 'n/a',
       location: {
-        street: '34 Bunn St',
+        street: '32 Bunn St',
         suburb: 'Pyrmont',
+        postcode: '2009',
+        state: 'NSW',
+        country: 'Australia',
         coordinates: {
           longitude: 115.857048,
           latitude: -31.953512
@@ -95,14 +104,23 @@ exports.testJobData = [
         year: 2017
     },
     client: {
-      name: 'johns backyard',
-      contact: 1223534646,
+      id: '111',
+      selected: false,
+      propertyName: 'Johns Mosman Garden',
+      fName: 'John',
+      lName: 'Smith',
+      email: 'js@javascript.com',
+      mobile: '0876578897',
+      avatar: 'n/a',
       location: {
-        street: '34 Bunn St',
+        street: '32 Bunn St',
         suburb: 'Pyrmont',
+        postcode: '2009',
+        state: 'NSW',
+        country: 'Australia',
         coordinates: {
-          longitude: 144.946014,
-          latitude: -37.815018
+          longitude: 115.857048,
+          latitude: -31.953512
         }
       }
     },

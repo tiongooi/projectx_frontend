@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Text, View, TouchableHighlight, ScrollView} from 'react-native';
 import TaskCardSelectable from '../components/presentation/TaskCardSelectable';
+import store from '../storeConfig';
+import {updateTaskScreenKey} from '../actions/newJob';
 
 class SelectTask extends Component {
   static navigationOptions = ({navigation}) => {
@@ -9,6 +11,11 @@ class SelectTask extends Component {
       title: 'Select Tasks'
     }
   }
+
+  componentWillMount() {
+    store.dispatch(updateTaskScreenKey(this.props.navigation.state.key));
+  }
+
   render() {
     let hasTask = false
     if (this.props.allTasks.length !== 0) {
