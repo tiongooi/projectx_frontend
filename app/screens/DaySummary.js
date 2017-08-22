@@ -73,7 +73,7 @@ class DaySummary extends Component {
                   {
                     todaysJobs.map(job => {
                        return job.employee.map((employee,index) => {
-                         return <Avatar avatar={employee.avatar} name={employee.fName} key={index} />
+                         return <Avatar user={employee} key={index} />
                       })
                     })
                   }
@@ -83,7 +83,13 @@ class DaySummary extends Component {
                 </View>
                 {
                   todaysJobs.map((job,index) => {
-                    return <JobCard client={job.client.name} title={job.title} key={index} navigate={navigate} job={job} />
+                    return <View key={index}>
+                              <TouchableHighlight onPress={()=>navigate('JobDetails',{job})}>
+                                  <View>
+                                    <JobCard client={job.client} title={job.title} key={index} />
+                                  </View>
+                               </TouchableHighlight>
+                          </View>
                   })
                 }
             </View>

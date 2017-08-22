@@ -12,6 +12,8 @@ import SelectTemplate from "./screens/SelectTemplate";
 import SelectClient from "./screens/SelectClient";
 import SelectTask from "./screens/SelectTask";
 import SelectEmployee from "./screens/SelectEmployee";
+import SetTitleAndComment from "./screens/SetTitleAndComment";
+import ConfirmNewJob from "./screens/ConfirmNewJob";
 
 //new set job stack
 const NewSetJobStack = StackNavigator({
@@ -27,6 +29,12 @@ const NewSetJobStack = StackNavigator({
   SelectEmployee: {
     screen: SelectEmployee
   },
+  SetTitleAndComment: {
+    screen: SetTitleAndComment
+  },
+  ConfirmNewJob: {
+    screen: ConfirmNewJob
+  }
 });
 //dashboard stack navigator
 const DashboardStack = StackNavigator({

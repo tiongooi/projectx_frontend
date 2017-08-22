@@ -29,15 +29,15 @@ class JobDetails extends React.Component {
     return(
       <ScrollView>
         <Maps coordinates={job.client.location.coordinates} />
-        <JobCard client={job.client.name} title={job.title}/>
+        <JobCard client={job.client.propertyName} title={job.title}/>
         <View>
           {
             job.employee.map((employee,index) => {
-              return <Avatar avatar={employee.avatar} name={employee.fName} key={index} />
+              return <Avatar user={employee} key={index} />
             })
           }
           <TouchableHighlight onPress={this.props.click}>
-            <View><Avatar avatar={"Quick"} name={"Assign"} /></View>
+            <View><Avatar user={{avatar:"Quick", fName:"assign"}} /></View>
           </TouchableHighlight>
         </View>
         {

@@ -38,8 +38,11 @@ const initialState = {
     client: {},
     task: [],
     employee: [],
-    comment: [],
-    title: ''
+    comment: '',
+    title: '',
+    selectTaskScreenKey: '',
+    selectEmployeeScreenKey: '',
+    setTitleAndCommentScreenKey: ''
   }
 };
 

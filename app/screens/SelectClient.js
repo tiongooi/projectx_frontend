@@ -12,6 +12,7 @@ class SelectClient extends Component {
       // headerRight: ( <XButton navigation={navigation} />)
     }
   }
+
   render() {
     let hasClient = false
     if (this.props.allClients.length !== 0) {
@@ -49,7 +50,7 @@ class SelectClient extends Component {
 
 mapStateToProps = (state) => {
   return {
-    allClients: state.clients.allClients 
+    allClients: state.clients.allClients
   }
 }
 

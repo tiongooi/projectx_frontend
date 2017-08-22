@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Text, View, TouchableHighlight, ScrollView} from 'react-native'
 import EmployeeCardSelectable from '../components/presentation/EmployeeCardSelectable'
+import store from '../storeConfig'
+import {updateEmployeeScreenKey} from '../actions/newJob'
 
 class SelectEmployee extends Component {
   static navigationOptions = ({navigation}) => {
@@ -9,6 +11,11 @@ class SelectEmployee extends Component {
       title: 'Select Employee'
     }
   }
+
+  componentWillMount() {
+    store.dispatch(updateEmployeeScreenKey(this.props.navigation.state.key));
+  }
+
   render() {
     let hasEmployee = false
     if (this.props.allEmployees.length !== 0) {
@@ -17,6 +24,7 @@ class SelectEmployee extends Component {
     return (
       <View>
         <View><Text>Search bar goes here</Text></View>
+        <TouchableHighlight onPress={()=> this.props.navigation.navigate('SetTitleAndComment')}><View><Text>NEXT</Text></View></TouchableHighlight>
         {
           hasEmployee ? (
             <ScrollView>
