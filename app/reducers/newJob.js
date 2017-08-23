@@ -1,4 +1,5 @@
 import {
+  UPDATE_SELECT_TEMPLATE_SCREEN_KEY,
   SET_NEW_JOB_CLIENT,
   SET_NEW_JOB_TASK,
   UNSET_NEW_JOB_TASK,
@@ -11,7 +12,8 @@ import {
   UPDATE_SET_TITLE_AND_COMMENT_SCREEN_KEY,
   INITIATING_NEW_JOB,
   INITIATE_NEW_JOB_SUCCESS,
-  INITIATE_NEW_JOB_FAIL
+  INITIATE_NEW_JOB_FAIL,
+  RESET_NEW_JOB_DATA
 } from '../constants';
 
 import initialState from '../initialState';
@@ -94,6 +96,29 @@ const newJobReducer = (state = initialState.newJob, action) => {
       return {
         ...state,
         setTitleAndCommentScreenKey: action.payload
+      }
+    }
+    case UPDATE_SELECT_TEMPLATE_SCREEN_KEY: {
+      return {
+        ...state,
+        selectTemplateScreenKey: action.payload
+      }
+    }
+    case RESET_NEW_JOB_DATA: {
+      return {
+        ...state,
+        isInitializing: false,
+        date: {},
+        message: '',
+        client: {},
+        task: [],
+        employee: [],
+        comment: '',
+        title: '',
+        selectTemplateScreenKey: '',
+        selectTaskScreenKey: '',
+        selectEmployeeScreenKey: '',
+        setTitleAndCommentScreenKey: ''
       }
     }
     default: return state
