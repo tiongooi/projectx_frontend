@@ -5,6 +5,8 @@ import TaskCard from '../components/presentation/TaskCard'
 import Avatar from '../components/presentation/Avatar'
 import Maps from '../components/presentation/Maps'
 import JobCard from '../components/presentation/JobCard'
+import {initiateNewJob} from '../actions/newJob'
+import {NavigationActions} from 'react-navigation';
 
 class ConfirmNewJob extends Component {
   static navigationOptions = ({navigation}) => {
@@ -70,11 +72,16 @@ class ConfirmNewJob extends Component {
             }
           </View>
         </TouchableHighlight>
+        <TouchableHighlight onPress={() => this.props.initiateNewJob(this.props.calendarSelected,this.props.navigation,this.props.backFromSelectTemplate,NavigationActions)}>
+          <View>
+            <Text>SUBMIT</Text>
+          </View>
+        </TouchableHighlight>
       </ScrollView>
     )
   }
 }
-
+//set up NEW JOB SUBMIT BUTTON
 mapStateToProps = (state) => {
   return {
     client: state.newJob.client,
@@ -84,13 +91,17 @@ mapStateToProps = (state) => {
     comment: state.newJob.comment,
     backFromSelectTask: state.newJob.selectTaskScreenKey,
     backFromSelectEmployee: state.newJob.selectEmployeeScreenKey,
-    backFromSetTitleAndComment: state.newJob.setTitleAndCommentScreenKey
+    backFromSetTitleAndComment: state.newJob.setTitleAndCommentScreenKey,
+    backFromSelectTemplate: state.newJob.selectTemplateScreenKey,
+    backFromTest: state.allSetJobs.daySummaryScreenKey,
+    calendarSelected: state.calendar.selected
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
-    clicked: () => alert('clicked')
+    clicked: () => alert('clicked'),
+    initiateNewJob: (calendar,navigation,backKey,NavigationActions) => dispatch(initiateNewJob(calendar,navigation,backKey,NavigationActions))
   }
 }
 

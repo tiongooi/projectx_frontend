@@ -1,4 +1,5 @@
 import {
+    UPDATE_SELECT_TEMPLATE_SCREEN_KEY,
     SET_NEW_JOB_CLIENT,
     UPDATE_SELECT_TASK_SCREEN_KEY,
     SET_NEW_JOB_TASK,
@@ -11,10 +12,19 @@ import {
     SET_NEW_JOB_COMMENT,
     INITIATING_NEW_JOB,
     INITIATE_NEW_JOB_SUCCESS,
-    INITIATE_NEW_JOB_FAIL
+    INITIATE_NEW_JOB_FAIL,
+    UPDATE_SET_JOBS,
+    RESET_NEW_JOB_DATA
 } from '../constants';
+import store from '../storeConfig';
 
 import {testJobData} from '../testJobData';
+
+exports.updateSelectTemplateScreenKey = (key) => {
+  return (dispatch) => {
+    dispatch(updatingTemplateScreenKey(key))
+  }
+}
 
 exports.setClient = (client,navigation) => {
   return (dispatch) => {
@@ -81,16 +91,62 @@ exports.setComment = (text) => {
   }
 }
 
-exports.initiateNewJob = () => {
+exports.initiateNewJob = (calendar,navigation,backKey,NavigationActions) => {
   return (dispatch) => {
+    let time = new Date(calendar)
+    //1.create new job object with data from store with date
+    //2. server will extract date to create template, and save the full version as job. Server save job first, then save template
+    //3.server will respond with object{msg:'ok',data:{setjob:{list of set jobs},template:{list of templates}}}
     dispatch(initiatingNewJob())
-    //fetch...below is for testing only
-    const res = {message: 'ok', data: testJobData }
+    //below is for testing only =======================
+    let testNewSetJob = {...store.getState().newJob}
+    testNewSetJob.comment = [{content:testNewSetJob.comment}]
+    testNewSetJob.date = {
+      timestamp: time.getTime(),
+      dateString: time.toISOString().slice(0,10),
+      date: time.getDate(),
+      month: time.getMonth() + 1,
+      year: time.getFullYear()
+    }
+    //==================================================
+    let newSetJob = {...store.getState().newJob}
+    newSetJob.employee = [...store.getState().newJob.employee]
+    newSetJob.task = [...store.getState().newJob.task]
+    newSetJob.client = newSetJob.client.id
+    newSetJob.date = {
+      timestamp: time.getTime(),
+      dateString: time.toISOString().slice(0,10),
+      date: time.getDate(),
+      month: time.getMonth() + 1,
+      year: time.getFullYear()
+    }
+    if (newSetJob.employee.length !== 0) {
+      newSetJob.employee.map((employee,index) => {
+        newSetJob.employee.splice(index, 1, employee.id)
+      })
+    }
+    if (newSetJob.task.length !== 0) {
+      newSetJob.task.map((task,index) => {
+        newSetJob.task.splice(index, 1, task.id)
+      })
+    }
+    //fetch...send newSetJob object to server
+    const res = {message: 'ok', data: {allSetJobs: [...store.getState().allSetJobs.jobs, testNewSetJob], allTemplates:{}}}
     if (res.message == 'ok') {
       dispatch(initiateSuccess())
-    } else {
-      dispatch(initiateFail())
+      dispatch(updateSetJobs(res.data.allSetJobs))
+      //dispatch(updateTemplate(res.data.allTemplates))
+      // dispatch(resetNewJobData())
+
+      navigation.goBack(null)
     }
+  }
+}
+
+const updatingTemplateScreenKey = (data) => {
+  return {
+    type: UPDATE_SELECT_TEMPLATE_SCREEN_KEY,
+    payload: data
   }
 }
 
@@ -149,10 +205,9 @@ const initiatingNewJob = () => {
   }
 }
 
-const initiateSuccess = (data) => {
+const initiateSuccess = () => {
   return {
-    type: INITIATE_NEW_JOB_SUCCESS,
-    payload: data
+    type: INITIATE_NEW_JOB_SUCCESS
   }
 }
 
@@ -181,5 +236,18 @@ const settingComment = (text) => {
   return {
     type: SET_NEW_JOB_COMMENT,
     payload: text
+  }
+}
+
+const updateSetJobs = (data) => {
+  return {
+    type: UPDATE_SET_JOBS,
+    payload: data
+  }
+}
+
+const resetNewJobData = () => {
+  return {
+    type: RESET_NEW_JOB_DATA
   }
 }

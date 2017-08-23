@@ -29,7 +29,7 @@ class JobDetails extends React.Component {
     return(
       <ScrollView>
         <Maps coordinates={job.client.location.coordinates} />
-        <JobCard client={job.client.propertyName} title={job.title}/>
+        <JobCard client={job.client} title={job.title}/>
         <View>
           {
             job.employee.map((employee,index) => {

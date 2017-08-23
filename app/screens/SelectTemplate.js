@@ -3,6 +3,8 @@ import {Text, View, TouchableHighlight, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import XButton from '../components/presentation/XButton';
 import JobTemplateCard from '../components/presentation/JobTemplateCard';
+import {updateSelectTemplateScreenKey} from '../actions/newJob';
+import store from '../storeConfig';
 
 class SelectTemplate extends Component {
 
@@ -11,6 +13,10 @@ class SelectTemplate extends Component {
       title: 'New job',
       headerRight: ( <XButton navigation={navigation} />)
     }
+  }
+
+  componentWillMount() {
+    store.dispatch(updateSelectTemplateScreenKey(this.props.navigation.state.key));
   }
 
   render() {
@@ -53,7 +59,8 @@ mapStateToProps = (state) => {
 
 mapDispatchToProps = (dispatch) => {
   return {
-    clicked: () => alert('slsls')
+    clicked: () => alert('slsls'),
+    updateSelectTemplateScreenKey: (key) => dispatch(updateSelectTemplateScreenKey(key))
   }
 }
 

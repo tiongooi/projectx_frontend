@@ -29,7 +29,7 @@ exports.testJobData = [
         }
       }
     },
-    title: 'month end maintenence',
+    title: 'month end maintenence', 
     task: [
       {id: 'x1', content:'sweep the floor'},
       {id: 'x2', content:'eat your munchies'},
