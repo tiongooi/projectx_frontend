@@ -4,11 +4,13 @@ import {Text, View, TouchableHighlight, ScrollView} from 'react-native'
 import EmployeeCardSelectable from '../components/presentation/EmployeeCardSelectable'
 import store from '../storeConfig'
 import {updateEmployeeScreenKey} from '../actions/newJob'
+import XButton from '../components/presentation/XButton'
 
 class SelectEmployee extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Select Employee'
+      title: 'Select Employee',
+      headerRight: ( <XButton navigation={navigation} />)
     }
   }
 

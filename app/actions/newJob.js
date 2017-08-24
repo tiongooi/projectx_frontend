@@ -91,7 +91,7 @@ exports.setComment = (text) => {
   }
 }
 
-exports.initiateNewJob = (calendar,navigation,backKey,NavigationActions) => {
+exports.initiateNewJob = (calendar,navigation) => {
   return (dispatch) => {
     let time = new Date(calendar)
     //1.create new job object with data from store with date
@@ -136,10 +136,14 @@ exports.initiateNewJob = (calendar,navigation,backKey,NavigationActions) => {
       dispatch(initiateSuccess())
       dispatch(updateSetJobs(res.data.allSetJobs))
       //dispatch(updateTemplate(res.data.allTemplates))
-      // dispatch(resetNewJobData())
-
-      navigation.goBack(null)
+      navigation.dismiss()
     }
+  }
+}
+
+exports.resetJobData = () => {
+  return (dispatch) => {
+    dispatch(resetNewJobData())
   }
 }
 
