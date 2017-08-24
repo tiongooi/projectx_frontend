@@ -4,11 +4,13 @@ import {Text, View, TouchableHighlight, ScrollView} from 'react-native';
 import TaskCardSelectable from '../components/presentation/TaskCardSelectable';
 import store from '../storeConfig';
 import {updateTaskScreenKey} from '../actions/newJob';
+import XButton from '../components/presentation/XButton';
 
 class SelectTask extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Select Tasks'
+      title: 'Select Tasks',
+      headerRight: ( <XButton navigation={navigation} />)
     }
   }
 

@@ -6,12 +6,13 @@ import Avatar from '../components/presentation/Avatar'
 import Maps from '../components/presentation/Maps'
 import JobCard from '../components/presentation/JobCard'
 import {initiateNewJob} from '../actions/newJob'
-import {NavigationActions} from 'react-navigation';
+import XButton from '../components/presentation/XButton'
 
 class ConfirmNewJob extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Confirm Job'
+      title: 'Confirm Job',
+      headerRight: ( <XButton navigation={navigation} />)
     }
   }
   render() {
@@ -72,7 +73,7 @@ class ConfirmNewJob extends Component {
             }
           </View>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => this.props.initiateNewJob(this.props.calendarSelected,this.props.navigation,this.props.backFromSelectTemplate,NavigationActions)}>
+        <TouchableHighlight onPress={() => this.props.initiateNewJob(this.props.calendarSelected,this.props.navigation)}>
           <View>
             <Text>SUBMIT</Text>
           </View>
@@ -92,8 +93,6 @@ mapStateToProps = (state) => {
     backFromSelectTask: state.newJob.selectTaskScreenKey,
     backFromSelectEmployee: state.newJob.selectEmployeeScreenKey,
     backFromSetTitleAndComment: state.newJob.setTitleAndCommentScreenKey,
-    backFromSelectTemplate: state.newJob.selectTemplateScreenKey,
-    backFromTest: state.allSetJobs.daySummaryScreenKey,
     calendarSelected: state.calendar.selected
   }
 }
@@ -101,7 +100,7 @@ mapStateToProps = (state) => {
 mapDispatchToProps = (dispatch) => {
   return {
     clicked: () => alert('clicked'),
-    initiateNewJob: (calendar,navigation,backKey,NavigationActions) => dispatch(initiateNewJob(calendar,navigation,backKey,NavigationActions))
+    initiateNewJob: (calendar,navigation) => dispatch(initiateNewJob(calendar,navigation))
   }
 }
 

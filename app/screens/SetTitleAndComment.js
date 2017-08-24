@@ -5,11 +5,13 @@ import {setTitle} from '../actions/newJob'
 import {setComment} from '../actions/newJob'
 import store from '../storeConfig'
 import {updateSetTitleAndCommentScreenKey} from '../actions/newJob'
+import XButton from '../components/presentation/XButton'
 
 class SetTitleAndComment extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Title'
+      title: 'Title',
+      headerRight: ( <XButton navigation={navigation} />)
     }
   }
 

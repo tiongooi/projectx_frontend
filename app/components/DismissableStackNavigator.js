@@ -1,0 +1,28 @@
+import React, {Component} from 'react'
+import {StackNavigator} from 'react-navigation'
+import {resetJobData} from '../actions/newJob'
+import store from '../storeConfig'
+
+export default DismissableStackNavigator = (routes, options) => {
+  const StackNav = StackNavigator(routes, options)
+
+  return class DismissableStackNav extends Component {
+    static router = StackNav.router
+
+    componentWillUnmount() {
+      store.dispatch(resetJobData())
+    }
+
+    render() {
+      const {state, goBack} = this.props.navigation
+      const nav = {
+        ...this.props.navigation,
+        dismiss: () => goBack(state.key)
+      }
+
+      return(
+        <StackNav navigation={nav} />
+      )
+    }
+  }
+};
