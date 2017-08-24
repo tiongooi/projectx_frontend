@@ -13,7 +13,8 @@ import {
   INITIATING_NEW_JOB,
   INITIATE_NEW_JOB_SUCCESS,
   INITIATE_NEW_JOB_FAIL,
-  RESET_NEW_JOB_DATA
+  RESET_NEW_JOB_DATA,
+  POPULATE_NEW_JOB_FIELDS
 } from '../constants';
 
 import initialState from '../initialState';
@@ -108,6 +109,7 @@ const newJobReducer = (state = initialState.newJob, action) => {
       return {
         ...state,
         isInitializing: false,
+        basedOnTemplate: 'none',
         date: {},
         message: '',
         client: {},
@@ -119,6 +121,16 @@ const newJobReducer = (state = initialState.newJob, action) => {
         selectTaskScreenKey: '',
         selectEmployeeScreenKey: '',
         setTitleAndCommentScreenKey: ''
+      }
+    }
+    case POPULATE_NEW_JOB_FIELDS: {
+      return {
+        ...state,
+        client: action.payload.client,
+        task: action.payload.task,
+        employee: [...state.employee, ...action.payload.employee],
+        title: action.payload.title,
+        basedOnTemplate: action.payload.id
       }
     }
     default: return state

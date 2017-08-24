@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Text, View, TouchableHighlight, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import XButton from '../components/presentation/XButton';
-import JobTemplateCard from '../components/presentation/JobTemplateCard';
+import TemplateCard from '../components/presentation/TemplateCard';
 import {updateSelectTemplateScreenKey} from '../actions/newJob';
+import {selectThisTemplate} from '../actions/newJob';
 import store from '../storeConfig';
 
 class SelectTemplate extends Component {
@@ -21,7 +22,7 @@ class SelectTemplate extends Component {
 
   render() {
     let hasTemplate = false
-    if (this.props.jobTemplates.length !== 0) {
+    if (this.props.templates.length !== 0) {
       hasTemplate = true
     }
 
@@ -38,8 +39,14 @@ class SelectTemplate extends Component {
         <ScrollView>
           {
             hasTemplate ? (
-              this.props.jobTemplates.map((template,index) => {
-                return <JobTemplateCard template={template} key={index}/>
+              this.props.templates.map((template,index) => {
+                return <View key={index}>
+                        <TouchableHighlight onPress={()=> this.props.selectThisTemplate(template,this.props.employeeList,this.props.taskList,this.props.navigation)}>
+                          <View>
+                            <TemplateCard template={template} key={index}/>
+                          </View>
+                        </TouchableHighlight>
+                       </View>
               })
             ):(
               <Text>You do not have any template</Text>
@@ -53,14 +60,17 @@ class SelectTemplate extends Component {
 
 mapStateToProps = (state) => {
   return {
-    jobTemplates: []
+    templates: state.templates.allTemplates,
+    employeeList: state.employees.allEmployees,
+    taskList: state.tasks.allTasks
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
     clicked: () => alert('slsls'),
-    updateSelectTemplateScreenKey: (key) => dispatch(updateSelectTemplateScreenKey(key))
+    updateSelectTemplateScreenKey: (key) => dispatch(updateSelectTemplateScreenKey(key)),
+    selectThisTemplate: (template,employeeList,taskList,navigation) => dispatch(selectThisTemplate(template,employeeList,taskList,navigation))
   }
 }
 

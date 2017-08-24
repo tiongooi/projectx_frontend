@@ -14,6 +14,8 @@ import SelectTask from "./screens/SelectTask";
 import SelectEmployee from "./screens/SelectEmployee";
 import SetTitleAndComment from "./screens/SetTitleAndComment";
 import ConfirmNewJob from "./screens/ConfirmNewJob";
+import ConfirmNewJob_fromTemplate from "./screens/ConfirmNewJob_fromTemplate";
+import SelectEmployee_fromTemplate from "./screens/SelectEmployee_fromTemplate";
 import DismissableStackNavigator from "./components/DismissableStackNavigator";
 
 //new set job stack (created with customize component(navigator))
@@ -35,6 +37,12 @@ const NewSetJobStack = DismissableStackNavigator({
   },
   ConfirmNewJob: {
     screen: ConfirmNewJob
+  },
+  ConfirmNewJob_fromTemplate: {
+    screen: ConfirmNewJob_fromTemplate
+  },
+  SelectEmployee_fromTemplate: {
+    screen: SelectEmployee_fromTemplate
   }
 });
 //dashboard stack navigator
