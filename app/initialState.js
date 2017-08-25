@@ -34,6 +34,7 @@ const initialState = {
   },
   newJob: {
     isInitializing: false,
+    basedOnTemplate: 'none',
     date: {},
     message: '',
     client: {},
@@ -45,6 +46,12 @@ const initialState = {
     selectEmployeeScreenKey: '',
     setTitleAndCommentScreenKey: '',
     selectTemplateScreenKey: ''
+  },
+  templates: {
+    isFetching: false,
+    isRemoving: false,
+    message: '',
+    allTemplates: []
   }
 };
 

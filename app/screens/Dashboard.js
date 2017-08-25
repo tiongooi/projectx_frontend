@@ -8,6 +8,7 @@ import {fetchJobs} from "../actions/allSetJobs";
 import {fetchEmployees} from "../actions/employees";
 import {fetchClients} from "../actions/clients";
 import {fetchTasks} from "../actions/tasks";
+import {fetchTemplates} from "../actions/templates";
 import store from '../storeConfig';
 
 let navigateTo;
@@ -22,6 +23,7 @@ class Dashboard extends React.Component {
     this.props.fetchEmployees()
     this.props.fetchClients()
     this.props.fetchTasks()
+    this.props.fetchTemplates()
   }
 
   render() {
@@ -86,7 +88,8 @@ function mapDispatchToProps(dispatch) {
     fetchJobs: () => dispatch(fetchJobs()),
     fetchEmployees: () => dispatch(fetchEmployees()),
     fetchClients: () => dispatch(fetchClients()),
-    fetchTasks: () => dispatch(fetchTasks())
+    fetchTasks: () => dispatch(fetchTasks()),
+    fetchTemplates: () => dispatch(fetchTemplates())
   }
 }
 

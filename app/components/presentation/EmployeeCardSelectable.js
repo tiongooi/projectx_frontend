@@ -6,6 +6,7 @@ import {setEmployee} from '../../actions/newJob'
 class EmployeeCardSelectable extends Component {
   render() {
     const employee = this.props.employee
+    console.log(this.props.newJobEmployee.includes(employee))
     return (
           <TouchableHighlight onPress={()=> this.props.setEmployee(employee,this.props.newJobEmployee)}>
             <View>

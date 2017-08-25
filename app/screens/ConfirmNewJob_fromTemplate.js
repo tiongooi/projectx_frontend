@@ -7,14 +7,21 @@ import Maps from '../components/presentation/Maps'
 import JobCard from '../components/presentation/JobCard'
 import {initiateNewJob} from '../actions/newJob'
 import XButton from '../components/presentation/XButton'
+import store from '../storeConfig';
+import {resetJobData} from '../actions/newJob';
 
-class ConfirmNewJob extends Component {
+class ConfirmNewJob_fromTemplate extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Confirm Job',
       headerRight: ( <XButton navigation={navigation} />)
     }
   }
+
+  componentWillUnmount() {
+    store.dispatch(resetJobData())
+  }
+
   render() {
     const {navigation} = this.props
     let hasEmployee = false
@@ -33,12 +40,9 @@ class ConfirmNewJob extends Component {
     return (
       <ScrollView>
         <Maps coordinates={this.props.client.location.coordinates} />
-        <TouchableHighlight onPress={() => navigation.goBack(this.props.backFromSelectTask)}>
           <View>
             <JobCard client={this.props.client} title={this.props.title}/>
           </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigation.goBack(this.props.backFromSetTitleAndComment)}>
           <View>
             {
               hasEmployee ? (
@@ -49,18 +53,21 @@ class ConfirmNewJob extends Component {
                 <Text>No employee has been assigned to this job</Text>
               )
             }
+            <TouchableHighlight onPress={() => navigation.navigate('SelectEmployee_fromTemplate')}>
+              <View>
+                <Avatar user={{avatar:'quick', fName:'assign'}} />
+              </View>
+            </TouchableHighlight>
           </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigation.goBack(null)}>
+        <TouchableHighlight onPress={() => alert('go to comment/title page but freeze title')}>
           <View>
             {
               hasComment ? (
                 <Text>{this.props.comment}</Text>
-              ):(null)
+              ):(<Text>No comments</Text>)
             }
           </View>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigation.goBack(this.props.backFromSelectEmployee)}>
           <View>
             {
               hasTask ? (
@@ -72,7 +79,6 @@ class ConfirmNewJob extends Component {
               )
             }
           </View>
-        </TouchableHighlight>
         <TouchableHighlight onPress={() => this.props.initiateNewJob(this.props.calendarSelected,this.props.navigation)}>
           <View>
             <Text>SUBMIT</Text>
@@ -99,9 +105,8 @@ mapStateToProps = (state) => {
 
 mapDispatchToProps = (dispatch) => {
   return {
-    clicked: () => alert('clicked'),
     initiateNewJob: (calendar,navigation) => dispatch(initiateNewJob(calendar,navigation))
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ConfirmNewJob);
+export default connect(mapStateToProps,mapDispatchToProps)(ConfirmNewJob_fromTemplate);

@@ -4,13 +4,19 @@ import {connect} from 'react-redux';
 import ClientCard from '../components/presentation/ClientCard';
 import XButton from '../components/presentation/XButton';
 import {setClient} from '../actions/newJob';
+import store from '../storeConfig';
+import {resetJobData} from '../actions/newJob';
 
 class SelectClient extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       title:'Select Client',
-      // headerRight: ( <XButton navigation={navigation} />)
+      headerRight: ( <XButton navigation={navigation} />)
     }
+  }
+
+  componentWillUnmount() {
+    store.dispatch(resetJobData())
   }
 
   render() {
