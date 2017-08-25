@@ -14,8 +14,7 @@ import {
     INITIATE_NEW_JOB_SUCCESS,
     INITIATE_NEW_JOB_FAIL,
     UPDATE_SET_JOBS,
-    RESET_NEW_JOB_DATA,
-    POPULATE_NEW_JOB_FIELDS
+    RESET_NEW_JOB_DATA
 } from '../constants';
 import store from '../storeConfig';
 
@@ -131,13 +130,12 @@ exports.initiateNewJob = (calendar,navigation) => {
         newSetJob.task.splice(index, 1, task.id)
       })
     }
-    console.log(store.getState().newJob)
     //fetch...send newSetJob object to server
     const res = {message: 'ok', data: {allSetJobs: [...store.getState().allSetJobs.jobs, testNewSetJob], allTemplates:{}}}
     if (res.message == 'ok') {
       dispatch(initiateSuccess())
       dispatch(updateSetJobs(res.data.allSetJobs))
-      // dispatch(updateTemplate(res.data.allTemplates))
+      //dispatch(updateTemplate(res.data.allTemplates))
       navigation.dismiss()
     }
   }
@@ -146,35 +144,6 @@ exports.initiateNewJob = (calendar,navigation) => {
 exports.resetJobData = () => {
   return (dispatch) => {
     dispatch(resetNewJobData())
-  }
-}
-
-exports.selectThisTemplate = (template,employeeList,taskList,navigation) => {
-  return (dispatch) => {
-    let clonedTemplate = {...template}
-    clonedTemplate.employee = [...template.employee]
-    clonedTemplate.task = [...template.task]
-    let messages = []
-
-    if (clonedTemplate.employee.length !== 0) {
-      clonedTemplate.employee.map((employee,index) => {
-        if (employeeList.indexOf(employee) < 0) {
-          clonedTemplate.employee.splice(index,1)
-          messages.push(`${employee.fName} ${employee.lName} was removed from the template`)
-        }
-      })
-    }
-
-    if (clonedTemplate.task.length !== 0) {
-      clonedTemplate.task.map((task,index) => {
-        if (taskList.indexOf(task) < 0) {
-          clonedTemplate.task.splice(index,1)
-          messages.push(`"${task.content}" was removed from the template`)
-        }
-      })
-    }
-    dispatch(populateNewJobFields(clonedTemplate))
-    navigation.navigate('ConfirmNewJob_fromTemplate')
   }
 }
 
@@ -284,12 +253,5 @@ const updateSetJobs = (data) => {
 const resetNewJobData = () => {
   return {
     type: RESET_NEW_JOB_DATA
-  }
-}
-
-const populateNewJobFields = (data) => {
-  return {
-    type: POPULATE_NEW_JOB_FIELDS,
-    payload: data
   }
 }
