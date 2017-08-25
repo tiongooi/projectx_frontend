@@ -14,7 +14,8 @@ import {
     INITIATE_NEW_JOB_SUCCESS,
     INITIATE_NEW_JOB_FAIL,
     UPDATE_SET_JOBS,
-    RESET_NEW_JOB_DATA
+    RESET_NEW_JOB_DATA,
+    POPULATE_NEW_JOB_FIELDS
 } from '../constants';
 import store from '../storeConfig';
 
@@ -41,14 +42,17 @@ exports.updateTaskScreenKey = (key) => {
 
 exports.setTask = (task,newJobTask) => {
   return (dispatch) => {
-    if (newJobTask.indexOf(task) < 0) {
-      //not found, so we add it
+    let isTaskSet = newJobTask.map(t => t.id).indexOf(task.id)
+    if (isTaskSet < 0) {
+      //not found, so we set
       dispatch(settingTask(task))
+      console.log(`${task.content} - ADDED`)
     } else {
-      //found, so we delete it
-      let spliceIndex = newJobTask.indexOf(task)
-      newJobTask.splice(spliceIndex,1)
-      dispatch(unsettingTask(newJobTask))
+      //found, so we remove
+      let clonedNewJobTask = [...newJobTask]
+      clonedNewJobTask.splice(isTaskSet,1)
+      console.log(`${task.content} - REMOVED`)
+      dispatch(unsettingTask(clonedNewJobTask))
     }
   }
 }
@@ -61,14 +65,17 @@ exports.updateEmployeeScreenKey = (key) => {
 
 exports.setEmployee = (employee,newJobEmployee) => {
   return (dispatch) => {
-    if (newJobEmployee.indexOf(employee) < 0) {
-      //not found, so we add it
+    let isEmployeeSet = newJobEmployee.map(e => e.id).indexOf(employee.id)
+    if (isEmployeeSet < 0) {
+      //not found, so we add
+      console.log(`${employee.fName} has been added`)
       dispatch(settingEmployee(employee))
     } else {
-      //found, so we remove it
-      let spliceIndex = newJobEmployee.indexOf(employee)
-      newJobEmployee.splice(spliceIndex,1)
-      dispatch(unsettingEmployee(newJobEmployee))
+      //found, so we get rid of it
+      let clonedNewEmployee = [...newJobEmployee]
+      console.log(`${clonedNewEmployee[isEmployeeSet].fName} has been removed`)
+      clonedNewEmployee.splice(isEmployeeSet,1)
+      dispatch(unsettingEmployee(clonedNewEmployee))
     }
   }
 }
@@ -138,6 +145,48 @@ exports.initiateNewJob = (calendar,navigation) => {
       //dispatch(updateTemplate(res.data.allTemplates))
       navigation.dismiss()
     }
+  }
+}
+
+exports.selectThisTemplate = (template,employeeList,taskList,navigation) => {
+  return (dispatch) => {
+    dispatch(resetNewJobData())
+    let shouldSpliceEmployee = -1
+    let shouldSpliceTask = -1
+    let clonedTemplate = {...template}
+    clonedTemplate.employee = [...template.employee]
+    clonedTemplate.task = [...template.task]
+
+    if (employeeList.length !== 0) {
+      employeeList.map((employee,index) => {
+        if (employeeList.indexOf(employee) < 0) {
+          shouldSpliceEmployee = index
+        }
+      })
+    } else {
+      navigation.goBack()
+    }
+
+    if (taskList.length !== 0) {
+      taskList.map((task,index) => {
+        if (taskList.indexOf(task) < 0) {
+          shouldSpliceTask = index
+        }
+      })
+    } else {
+      navigation.goBack()
+    }
+
+    if (shouldSpliceEmployee !== -1) {
+      clonedTemplate.employee.splice(shouldSpliceEmployee,1)
+    }
+
+    if (shouldSpliceTask !== -1) {
+      clonedTemplate.task.splice(shouldSpliceTask,1)
+    }
+
+    dispatch(populateNewJob(clonedTemplate))
+    navigation.navigate('ConfirmNewJob_fromTemplate')
   }
 }
 
@@ -253,5 +302,12 @@ const updateSetJobs = (data) => {
 const resetNewJobData = () => {
   return {
     type: RESET_NEW_JOB_DATA
+  }
+}
+
+const populateNewJob = (data) => {
+  return {
+    type: POPULATE_NEW_JOB_FIELDS,
+    payload: data
   }
 }
