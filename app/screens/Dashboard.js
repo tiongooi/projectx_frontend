@@ -80,7 +80,7 @@ function mapStateToProps(state) {
     allSetJobs: state.allSetJobs.jobs,
     calendarSelected: state.calendar.selected
   }
-}
+} 
 
 function mapDispatchToProps(dispatch) {
   return {
