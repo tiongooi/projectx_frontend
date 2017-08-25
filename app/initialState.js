@@ -39,7 +39,7 @@ const initialState = {
     message: '',
     client: {},
     task: [],
-    employee: [],
+    employee: [], 
     comment: '',
     title: '',
     selectTaskScreenKey: '',

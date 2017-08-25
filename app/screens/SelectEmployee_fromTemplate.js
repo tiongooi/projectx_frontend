@@ -22,7 +22,7 @@ class SelectEmployee_fromTemplate extends Component {
     return (
       <View>
         <View><Text>Search bar goes here</Text></View>
-        <TouchableHighlight onPress={()=> this.props.navigation.goBack()}><View><Text>NEXT</Text></View></TouchableHighlight>
+        <TouchableHighlight onPress={()=> this.props.navigation.goBack()}><View><Text>DONE</Text></View></TouchableHighlight>
         {
           hasEmployee ? (
             <ScrollView>
@@ -49,7 +49,7 @@ class SelectEmployee_fromTemplate extends Component {
 }
 
 mapStateToProps = (state) => {
-  console.log(state.newJob.employee)
+  console.log(state.newJob.employee.length)
   return {
     allEmployees: state.employees.allEmployees
   }

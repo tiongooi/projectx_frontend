@@ -6,11 +6,17 @@ import {setEmployee} from '../../actions/newJob'
 class EmployeeCardSelectable extends Component {
   render() {
     const employee = this.props.employee
+    let selected = false
+    this.props.newJobEmployee.filter((newJobEmployee) => {
+      if (newJobEmployee.id == employee.id) {
+        selected = true
+      }
+    })
     return (
           <TouchableHighlight onPress={()=> this.props.setEmployee(employee,this.props.newJobEmployee)}>
             <View>
               {
-                this.props.newJobEmployee.includes(employee) ? (
+                selected ? (
                   <View>
                       <View><Text>{employee.avatar}</Text></View>
                       <Text>{employee.fName} {employee.lName}</Text>
