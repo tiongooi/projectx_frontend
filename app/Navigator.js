@@ -1,22 +1,25 @@
-import React from 'react';
-import {DrawerNavigator, StackNavigator} from "react-navigation";
-import {Button} from 'react-native';
-import Dashboard from "./screens/Dashboard";
-import DaySummary from "./screens/DaySummary";
-import JobDetails from "./screens/JobDetails";
-import Employees from "./screens/Employees";
-import EmployeeSummary from "./screens/EmployeeSummary";
-import Clients from "./screens/Clients";
-import ClientSummary from "./screens/ClientSummary";
-import SelectTemplate from "./screens/SelectTemplate";
-import SelectClient from "./screens/SelectClient";
-import SelectTask from "./screens/SelectTask";
-import SelectEmployee from "./screens/SelectEmployee";
-import SetTitleAndComment from "./screens/SetTitleAndComment";
-import ConfirmNewJob from "./screens/ConfirmNewJob";
-import ConfirmNewJob_fromTemplate from "./screens/ConfirmNewJob_fromTemplate";
-import SelectEmployee_fromTemplate from "./screens/SelectEmployee_fromTemplate";
-import DismissableStackNavigator from "./components/DismissableStackNavigator";
+import React from 'react'
+import {DrawerNavigator, StackNavigator} from 'react-navigation'
+import {Button} from 'react-native'
+import Dashboard from './screens/Dashboard'
+import DaySummary from './screens/DaySummary'
+import JobDetails from './screens/JobDetails'
+import Employees from './screens/Employees'
+import EmployeeSummary from './screens/EmployeeSummary'
+import Clients from './screens/Clients'
+import ClientSummary from './screens/ClientSummary'
+import SelectTemplate from './screens/SelectTemplate'
+import SelectClient from './screens/SelectClient'
+import SelectTask from './screens/SelectTask'
+import SelectEmployee from './screens/SelectEmployee'
+import SetTitleAndComment from './screens/SetTitleAndComment'
+import ConfirmNewJob from './screens/ConfirmNewJob'
+import ConfirmNewJob_fromTemplate from './screens/ConfirmNewJob_fromTemplate'
+import SelectEmployee_fromTemplate from './screens/SelectEmployee_fromTemplate'
+import DismissableStackNavigator from './components/DismissableStackNavigator'
+import SelectTask_fromTemplate from './screens/SelectTask_fromTemplate'
+import SelectEmployee_fromSetJob from './screens/SelectEmployee_fromSetJob'
+import SelectTask_fromSetJob from './screens/SelectTask_fromSetJob'
 
 //new set job stack (created with customize component(navigator))
 const NewSetJobStack = DismissableStackNavigator({
@@ -43,8 +46,20 @@ const NewSetJobStack = DismissableStackNavigator({
   },
   SelectEmployee_fromTemplate: {
     screen: SelectEmployee_fromTemplate
+  },
+  SelectTask_fromTemplate: {
+    screen: SelectTask_fromTemplate
   }
 });
+//edit set job stack
+const EditSetJobStack = DismissableStackNavigator({
+  SelectEmployee_fromSetJob: {
+    screen: SelectEmployee_fromSetJob
+  },
+  SelectTask_fromSetJob: {
+    screen: SelectTask_fromSetJob
+  }
+})
 //dashboard stack navigator
 const DashboardStack = StackNavigator({
   Dashboard: {
@@ -67,6 +82,9 @@ const MainStack = StackNavigator({
   },
   NewSetJob: {
     screen: NewSetJobStack
+  },
+  EditSetJob: {
+    screen: EditSetJobStack
   }
 },{
   mode: 'modal',

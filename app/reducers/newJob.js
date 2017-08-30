@@ -127,7 +127,7 @@ const newJobReducer = (state = initialState.newJob, action) => {
       return {
         ...state,
         client: {...action.payload.client},
-        task: [...action.payload.task],
+        task: [...state.task, ...action.payload.task],
         employee: [...state.employee, ...action.payload.employee],
         comment: action.payload.comment,
         title: action.payload.title,

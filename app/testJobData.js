@@ -29,7 +29,7 @@ exports.testJobData = [
         }
       }
     },
-    title: 'month end maintenence', 
+    title: 'month end maintenence',
     task: [
       {id: 'x1', content:'sweep the floor'},
       {id: 'x2', content:'eat your munchies'},
@@ -40,14 +40,26 @@ exports.testJobData = [
     ],
     employee: [
       {
-        id:1,
-        avatar: 'avatar n/a',
-        fName: 'Ron'
+        id: '011',
+        fName: 'Barrack',
+        lName: 'Obama',
+        avatar: 'n/a',
+        mobile: '0488923849',
+        email: 'ba@ba.com',
+        addedOn: '1502774166913',
+        selected: false,
+        pending: false
       },
       {
-        id:2,
-        avatar: 'avatar n/a',
-        fName: 'Jane'
+        id: '012',
+        fName: 'Vladimir',
+        lName: 'Putin',
+        avatar: 'n/a',
+        mobile: '0498728394',
+        email: 'vp@vp.com',
+        addedOn: '1502774166913',
+        selected: false,
+        pending: false
       }
     ]
   },

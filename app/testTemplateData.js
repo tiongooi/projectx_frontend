@@ -50,9 +50,9 @@ exports.testTemplateData = [
         }
     ],
     task: [
-      {id: 'x7', content:'sweep the floor'},
-      {id: 'x8', content:'eat your munchies'},
-      {id: 'x9', content:'paint the wall'}
+      {id: 'x1', content:'sweep the floor', selected: false},
+      {id: 'x2', content:'eat your munchies', selected: false},
+      {id: 'x3', content:'paint the wall', selected: false}
     ]
   }
 ]

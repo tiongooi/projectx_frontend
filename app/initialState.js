@@ -39,7 +39,7 @@ const initialState = {
     message: '',
     client: {},
     task: [],
-    employee: [], 
+    employee: [],
     comment: '',
     title: '',
     selectTaskScreenKey: '',
@@ -52,6 +52,13 @@ const initialState = {
     isRemoving: false,
     message: '',
     allTemplates: []
+  },
+  editSetJob: {
+    isUpdating: false,
+    jobId: '',
+    message: '',
+    employee: [],
+    task: []
   }
 };
 

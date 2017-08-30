@@ -30,7 +30,7 @@ const allSetJobs = (state = initialState.allSetJobs, action) => {
     case UPDATE_SET_JOBS: {
       return {
         ...state,
-        jobs: action.payload
+        jobs: [...action.payload]
       }
     }
     case UPDATE_SCREEN_KEY: {

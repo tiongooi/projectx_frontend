@@ -7,6 +7,7 @@ import clientsReducer from "./clients";
 import newJobReducer from "./newJob";
 import tasksReducer from "./tasks";
 import templatesReducer from "./templates";
+import editSetJobReducer from "./editSetJob";
 
 const rootReducer = combineReducers({
   allSetJobs: allSetJobsReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   clients: clientsReducer,
   newJob: newJobReducer,
   tasks: tasksReducer,
-  templates: templatesReducer
+  templates: templatesReducer,
+  editSetJob: editSetJobReducer
 });
 
 module.exports = rootReducer;

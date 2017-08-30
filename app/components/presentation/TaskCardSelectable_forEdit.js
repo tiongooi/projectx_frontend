@@ -1,19 +1,19 @@
 import React, {Component} from 'react'
 import {View, Text, TouchableHighlight} from 'react-native'
 import {connect} from 'react-redux'
-import {setTask} from '../../actions/newJob'
+import {setTaskForJob} from '../../actions/editSetJob'
 
-class TaskCardSelectable extends Component {
+class TaskCardSelectable_forEdit extends Component {
   render() {
     let task = this.props.task
     let selected = false
-    this.props.newJobTask.map(t => {
+    this.props.editJobTask.map(t => {
       if (t.id == task.id ) {
         selected = true
       }
     })
     return (
-      <TouchableHighlight onPress={()=>this.props.setTask(task,this.props.newJobTask)}>
+      <TouchableHighlight onPress={()=>this.props.setTaskForJob(task,this.props.editJobTask)}>
         <View>
           {
             selected ? (
@@ -36,14 +36,14 @@ class TaskCardSelectable extends Component {
 
 mapStateToProps = (state) => {
   return {
-    newJobTask: state.newJob.task
+    editJobTask: state.editSetJob.task
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
     clicked: () => alert('boooooyah'),
-    setTask: (task,newJobTask) => dispatch(setTask(task,newJobTask))
+    setTaskForJob: (task,editJobTask) => dispatch(setTaskForJob(task,editJobTask))
   }
 }
 
@@ -62,4 +62,4 @@ const styles = {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(TaskCardSelectable)
+export default connect(mapStateToProps,mapDispatchToProps)(TaskCardSelectable_forEdit)

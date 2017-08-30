@@ -151,42 +151,54 @@ exports.initiateNewJob = (calendar,navigation) => {
 exports.selectThisTemplate = (template,employeeList,taskList,navigation) => {
   return (dispatch) => {
     dispatch(resetNewJobData())
-    let shouldSpliceEmployee = -1
-    let shouldSpliceTask = -1
+    let employeeNotInList = []
+    let taskNotInList = []
     let clonedTemplate = {...template}
     clonedTemplate.employee = [...template.employee]
     clonedTemplate.task = [...template.task]
 
     if (employeeList.length !== 0) {
-      employeeList.map((employee,index) => {
-        if (employeeList.indexOf(employee) < 0) {
-          shouldSpliceEmployee = index
+      clonedTemplate.employee.map((te,index) => {
+        let isEmployeeFound = employeeList.map(e => e.id).indexOf(te.id)
+        if (isEmployeeFound < 0) {
+          //employee no longer exist in employee list, so we push into array and remove it
+          console.log('removed')
+          employeeNotInList.push(index)
         }
       })
-    } else {
-      navigation.goBack()
     }
 
     if (taskList.length !== 0) {
-      taskList.map((task,index) => {
-        if (taskList.indexOf(task) < 0) {
-          shouldSpliceTask = index
+      clonedTemplate.task.map((tt,index) => {
+        let isTaskFound = taskList.map(t => t.id).indexOf(tt.id)
+        if (isTaskFound < 0) {
+          //task no longer exist in list, push into array and remove it from template
+          console.log('removed')
+          taskNotInList.push(index)
         }
       })
-    } else {
+    }
+
+    if (employeeNotInList.length !== 0) {
+      for (let i = employeeNotInList.length -1; i >= 0; i--) {
+        clonedTemplate.employee.splice(employeeNotInList[i],1)
+      }
+    }
+
+    if (taskNotInList.length !== 0) {
+      for (let i = taskNotInList.length -1; i >= 0; i--) {
+        clonedTemplate.task.splice(taskNotInList[i],1)
+      }
+    }
+
+    if (taskNotInList.length !== 0 || employeeNotInList.length !== 0) {
+      //either employee or task has been removed, we notify user and go back
       navigation.goBack()
+    } else {
+      dispatch(populateNewJob(clonedTemplate))
+      navigation.navigate('ConfirmNewJob_fromTemplate')
     }
 
-    if (shouldSpliceEmployee !== -1) {
-      clonedTemplate.employee.splice(shouldSpliceEmployee,1)
-    }
-
-    if (shouldSpliceTask !== -1) {
-      clonedTemplate.task.splice(shouldSpliceTask,1)
-    }
-
-    dispatch(populateNewJob(clonedTemplate))
-    navigation.navigate('ConfirmNewJob_fromTemplate')
   }
 }
 
