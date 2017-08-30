@@ -1,19 +1,19 @@
 import React, {Component} from 'react'
 import {Text,View,TouchableHighlight} from 'react-native'
 import {connect} from 'react-redux'
-import {setEmployee} from '../../actions/newJob'
+import {setEmployeeForJob} from '../../actions/editSetJob'//
 
-class EmployeeCardSelectable extends Component {
+class EmployeeCardSelectable_forEdit extends Component {
   render() {
     let employee = this.props.employee
     let selected = false
-    this.props.newJobEmployee.map((newJobEmployee) => {
-      if (newJobEmployee.id == employee.id) {
+    this.props.editJobEmployee.map((editJobEmployee) => {
+      if (editJobEmployee.id == employee.id) {
         selected = true
       }
     })
     return (
-          <TouchableHighlight onPress={()=> this.props.setEmployee(employee,this.props.newJobEmployee)}>
+          <TouchableHighlight onPress={()=> this.props.setEmployeeForJob(employee,this.props.editJobEmployee)}>
             <View>
               {
                 selected ? (
@@ -38,14 +38,14 @@ class EmployeeCardSelectable extends Component {
 
 mapStateToProps = (state) => {
   return {
-    newJobEmployee: state.newJob.employee
+    editJobEmployee: state.editSetJob.employee
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
     clicked: () => alert('clicked again'),
-    setEmployee: (employee, newJobEmployee) => dispatch(setEmployee(employee, newJobEmployee))
+    setEmployeeForJob: (employee, editJobEmployee) => dispatch(setEmployeeForJob(employee, editJobEmployee))
   }
 }
 
@@ -64,4 +64,4 @@ const styles = {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(EmployeeCardSelectable);
+export default connect(mapStateToProps,mapDispatchToProps)(EmployeeCardSelectable_forEdit);

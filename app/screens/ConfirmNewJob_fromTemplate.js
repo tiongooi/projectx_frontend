@@ -68,6 +68,7 @@ class ConfirmNewJob_fromTemplate extends Component {
             }
           </View>
         </TouchableHighlight>
+        <TouchableHighlight onPress={() => navigation.navigate('SelectTask_fromTemplate')}><View><Text>quick re-task</Text></View></TouchableHighlight>
           <View>
             {
               hasTask ? (
