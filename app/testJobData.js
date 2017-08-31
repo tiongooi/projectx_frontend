@@ -36,7 +36,21 @@ exports.testJobData = [
       {id: 'x3', content:'paint the wall'}
     ],
     comment: [
-      {content: 'dont forget to fix the roof', user: 'John'}
+      {
+        id: 'c01',
+        content: 'dont forget to fix the roof',
+        fromUser: {
+          id: '011',
+          fName: 'Barrack',
+          lName: 'Obama',
+          avatar: 'n/a',
+          mobile: '0488923849',
+          email: 'ba@ba.com',
+          addedOn: '1502774166913',
+          selected: false,
+          pending: false
+        },
+      }
     ],
     employee: [
       {

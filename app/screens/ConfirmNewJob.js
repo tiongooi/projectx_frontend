@@ -56,7 +56,9 @@ class ConfirmNewJob extends Component {
             {
               hasComment ? (
                 <Text>{this.props.comment}</Text>
-              ):(null)
+              ):(
+                <Text>No comments</Text>
+              )
             }
           </View>
         </TouchableHighlight>

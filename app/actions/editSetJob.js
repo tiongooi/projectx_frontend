@@ -1,6 +1,9 @@
 import {
   POPULATE_EDIT_JOB_EMPLOYEE,
   POPULATE_EDIT_JOB_TASK,
+  POPULATE_EDIT_JOB_COMMENT,
+  WRITE_COMMENT,
+  CLEAR_NEW_COMMENT_FIELD,
   RESET_EDIT_JOB_FIELDS,
   SET_EDIT_JOB_EMPLOYEE,
   UNSET_EDIT_JOB_EMPLOYEE,
@@ -166,6 +169,55 @@ exports.confirmTask = (editJob,allSetJobs,navigation) => {
   }
 }
 
+
+exports.setComment = (setJob,navigate) => {
+  return (dispatch) => {
+    let clonedSetJob = {...setJob}
+    dispatch(resetEditSetJobFields())
+    dispatch(populateEditSetJobComment(clonedSetJob))
+    navigate('SetComment_fromSetJob')
+  }
+}
+
+exports.writeComment = (text) => {
+  return (dispatch) => {
+    dispatch(writingComment(text))
+  }
+}
+
+exports.postComment = (editJob,allSetJobs,navigation,Keyboard) => {
+  return (dispatch) => {
+    Keyboard.dismiss()
+    editJob.newComment = editJob.newComment.trim()
+    if (editJob.newComment.length !== 0) {
+      // Keyboard.dismiss()
+      dispatch(postingComment())
+      //fetch...(editJob), res is new comment obj
+      //below for testing only =======
+      let commentObj = {content: editJob.newComment, id: 'cNew001', fromUser:{fName: 'Tiong'}}
+      const res = {message:'ok', data:commentObj}
+      //==============================
+      if (res.message == 'ok') {
+        //success
+        let clonedAllSetJobs = [...allSetJobs]
+        let indexOfJob = clonedAllSetJobs.map(j => j.id).indexOf(editJob.id)
+        clonedAllSetJobs[indexOfJob].comment = [...clonedAllSetJobs[indexOfJob].comment, commentObj]
+        dispatch(populateEditSetJobComment(clonedAllSetJobs[indexOfJob]))
+        dispatch(updateSetJobs(clonedAllSetJobs))
+        dispatch(postCommentSuccess())
+        setTimeout(() => navigation.dismiss(),1500)
+      } else {
+        //fail
+        dispatch(postCommentFail())
+      }
+    } else {
+      Keyboard.dismiss()
+      dispatch(clearNewCommentField())
+      alert('comments cannot be blank')
+    }
+  }
+}
+
 const resetEditSetJobFields = () => {
   return {
     type: RESET_EDIT_JOB_FIELDS
@@ -236,5 +288,43 @@ const updateSetJobs = (data) => {
   return {
     type: UPDATE_SET_JOBS,
     payload: data
+  }
+}
+
+const populateEditSetJobComment = (data) => {
+  return {
+    type: POPULATE_EDIT_JOB_COMMENT,
+    payload: data
+  }
+}
+
+const writingComment = (data) => {
+  return {
+    type: WRITE_COMMENT,
+    payload: data
+  }
+}
+
+const postingComment = () => {
+  return {
+    type: UPDATING_EDIT_JOB
+  }
+}
+
+const postCommentSuccess = () => {
+  return {
+    type: UPDATE_EDIT_JOB_SUCCESS
+  }
+}
+
+const postCommentFail = () => {
+  return {
+    type: UPDATE_EDIT_JOB_FAIL
+  }
+}
+
+const clearNewCommentField = () => {
+  return {
+    type: CLEAR_NEW_COMMENT_FIELD
   }
 }
