@@ -63,8 +63,10 @@ class ConfirmNewJob_fromTemplate extends Component {
           <View>
             {
               hasComment ? (
-                <Text>{this.props.comment}</Text>
-              ):(<Text>No comments</Text>)
+                <TouchableHighlight onPress={() => navigation.navigate('SetComment_fromTemplate')}><View><Text>{this.props.comment}</Text></View></TouchableHighlight>
+              ):(
+                <TouchableHighlight onPress={() => navigation.navigate('SetComment_fromTemplate')}><View><Text>No comments</Text></View></TouchableHighlight>
+              )
             }
           </View>
         </TouchableHighlight>

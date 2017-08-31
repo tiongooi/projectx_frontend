@@ -16,11 +16,12 @@ import SetTitleAndComment from './screens/SetTitleAndComment'
 import ConfirmNewJob from './screens/ConfirmNewJob'
 import ConfirmNewJob_fromTemplate from './screens/ConfirmNewJob_fromTemplate'
 import SelectEmployee_fromTemplate from './screens/SelectEmployee_fromTemplate'
-import DismissableStackNavigator from './components/DismissableStackNavigator'
 import SelectTask_fromTemplate from './screens/SelectTask_fromTemplate'
+import SetComment_fromTemplate from './screens/SetComment_fromTemplate'
 import SelectEmployee_fromSetJob from './screens/SelectEmployee_fromSetJob'
 import SelectTask_fromSetJob from './screens/SelectTask_fromSetJob'
 import SetComment_fromSetJob from './screens/SetComment_fromSetJob'
+import DismissableStackNavigator from './components/DismissableStackNavigator'
 
 //new set job stack (created with customize component(navigator))
 const NewSetJobStack = DismissableStackNavigator({
@@ -50,6 +51,9 @@ const NewSetJobStack = DismissableStackNavigator({
   },
   SelectTask_fromTemplate: {
     screen: SelectTask_fromTemplate
+  },
+  SetComment_fromTemplate: {
+    screen: SetComment_fromTemplate
   }
 });
 //edit set job stack

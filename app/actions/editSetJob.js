@@ -187,10 +187,8 @@ exports.writeComment = (text) => {
 
 exports.postComment = (editJob,allSetJobs,navigation,Keyboard) => {
   return (dispatch) => {
-    Keyboard.dismiss()
     editJob.newComment = editJob.newComment.trim()
     if (editJob.newComment.length !== 0) {
-      // Keyboard.dismiss()
       dispatch(postingComment())
       //fetch...(editJob), res is new comment obj
       //below for testing only =======
@@ -206,14 +204,14 @@ exports.postComment = (editJob,allSetJobs,navigation,Keyboard) => {
         dispatch(updateSetJobs(clonedAllSetJobs))
         dispatch(postCommentSuccess())
         setTimeout(() => navigation.dismiss(),1500)
-      } else {
+        Keyboard.dismiss()
+      } else { 
         //fail
         dispatch(postCommentFail())
       }
     } else {
-      Keyboard.dismiss()
       dispatch(clearNewCommentField())
-      alert('comments cannot be blank')
+      // alert('comments cannot be blank') << causes issue with keyboard dismiss
     }
   }
 }
