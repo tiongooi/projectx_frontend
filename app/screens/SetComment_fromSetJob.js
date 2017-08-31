@@ -3,12 +3,14 @@ import {connect} from 'react-redux'
 import {View,Text,ScrollView,TouchableHighlight,TextInput,KeyboardAvoidingView,FlatList,Keyboard} from 'react-native'
 import {writeComment} from '../actions/editSetJob'
 import {postComment} from '../actions/editSetJob'
+import XButton from '../components/presentation/XButton'
 
 class SetComment_fromSetJob extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: 'Comments',
       headerLeft: null,
+      headerRight: ( <XButton navigation={navigation} />)
     }
   }
 
