@@ -58,7 +58,9 @@ const initialState = {
     jobId: '',
     message: '',
     employee: [],
-    task: []
+    task: [],
+    comment: [],
+    newComment: ''
   }
 };
 

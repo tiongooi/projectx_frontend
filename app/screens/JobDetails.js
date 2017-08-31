@@ -9,6 +9,7 @@ import Maps from '../components/presentation/Maps'
 import RemoveJobButton from '../components/presentation/RemoveJobButton'
 import {quickAssign} from '../actions/editSetJob'
 import {quickRetask} from '../actions/editSetJob'
+import {setComment} from '../actions/editSetJob'
 
 class JobDetails extends React.Component {
 
@@ -45,11 +46,16 @@ class JobDetails extends React.Component {
         </View>
         {
           (lastComment ?
-            <View>
-              <View style={styles.testDiv}></View>
-              <Text>{lastComment.content}</Text>
-            </View>
-            :null)
+            <TouchableHighlight onPress={()=> this.props.setComment(job,navigate)}>
+              <View>
+                <Text>{lastComment.content}</Text>
+              </View>
+            </TouchableHighlight>
+            :
+            <TouchableHighlight onPress={()=> this.props.setComment(job,navigate)}>
+              <View><Text>No comments</Text></View>
+            </TouchableHighlight>
+        )
         }
         <TouchableHighlight onPress={() => this.props.quickRetask(job,this.props.taskList,navigate)}>
           <View><Text>Edit Task</Text></View>
@@ -76,7 +82,8 @@ function mapDispatchToProps(dispatch) {
   return {
     click: () => alert("clicked"),
     quickAssign: (job,employeeList,navigate) => dispatch(quickAssign(job,employeeList,navigate)),
-    quickRetask: (job,taskList,navigate) => dispatch(quickRetask(job,taskList,navigate))
+    quickRetask: (job,taskList,navigate) => dispatch(quickRetask(job,taskList,navigate)),
+    setComment: (job,navigate) => dispatch(setComment(job,navigate))
   }
 }
 

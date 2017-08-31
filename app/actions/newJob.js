@@ -107,7 +107,7 @@ exports.initiateNewJob = (calendar,navigation) => {
     dispatch(initiatingNewJob())
     //below is for testing only =======================
     let testNewSetJob = {...store.getState().newJob}
-    testNewSetJob.comment = [{content:testNewSetJob.comment}]
+    testNewSetJob.comment = testNewSetJob.comment.trim()
     testNewSetJob.date = {
       timestamp: time.getTime(),
       dateString: time.toISOString().slice(0,10),
@@ -115,10 +115,16 @@ exports.initiateNewJob = (calendar,navigation) => {
       month: time.getMonth() + 1,
       year: time.getFullYear()
     }
+    if (testNewSetJob.comment.length == 0) {
+      testNewSetJob.comment = []
+    } else {
+      testNewSetJob.comment = [{id:'c01', content:testNewSetJob.comment,fromUser: {fName:'John', avatar:'n/a', id:'014'}}]
+    }
     //==================================================
     let newSetJob = {...store.getState().newJob}
     newSetJob.employee = [...store.getState().newJob.employee]
     newSetJob.task = [...store.getState().newJob.task]
+    newSetJob.comment = newSetJob.comment.trim()
     newSetJob.client = newSetJob.client.id
     newSetJob.date = {
       timestamp: time.getTime(),
@@ -127,6 +133,7 @@ exports.initiateNewJob = (calendar,navigation) => {
       month: time.getMonth() + 1,
       year: time.getFullYear()
     }
+
     if (newSetJob.employee.length !== 0) {
       newSetJob.employee.map((employee,index) => {
         newSetJob.employee.splice(index, 1, employee.id)

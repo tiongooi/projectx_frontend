@@ -20,6 +20,7 @@ import DismissableStackNavigator from './components/DismissableStackNavigator'
 import SelectTask_fromTemplate from './screens/SelectTask_fromTemplate'
 import SelectEmployee_fromSetJob from './screens/SelectEmployee_fromSetJob'
 import SelectTask_fromSetJob from './screens/SelectTask_fromSetJob'
+import SetComment_fromSetJob from './screens/SetComment_fromSetJob'
 
 //new set job stack (created with customize component(navigator))
 const NewSetJobStack = DismissableStackNavigator({
@@ -58,6 +59,9 @@ const EditSetJobStack = DismissableStackNavigator({
   },
   SelectTask_fromSetJob: {
     screen: SelectTask_fromSetJob
+  },
+  SetComment_fromSetJob: {
+    screen: SetComment_fromSetJob
   }
 })
 //dashboard stack navigator
