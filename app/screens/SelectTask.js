@@ -19,14 +19,11 @@ class SelectTask extends Component {
 
   componentWillMount() {
     store.dispatch(updateTaskScreenKey(this.props.navigation.state.key))
+    store.dispatch(resetClientSearchBar())
   }
 
   componentWillUnmount() {
     store.dispatch(resetTaskSearchBar())
-  }
-
-  componentDidMount() {
-    store.dispatch(resetClientSearchBar())
   }
 
   render() {
@@ -51,6 +48,7 @@ class SelectTask extends Component {
           value={this.props.search}
           maxLength={50}
           onChangeText={(text) => this.props.updateSearch(text)}
+          autoCorrect={false}
           />
         </View>
         <TouchableHighlight onPress={()=> this.props.navigation.navigate('SelectEmployee')}><View><Text>NEXT</Text></View></TouchableHighlight>

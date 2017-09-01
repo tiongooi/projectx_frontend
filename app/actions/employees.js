@@ -4,7 +4,9 @@ import {
   FETCHING_ALL_EMPLOYEES_FAIL,
   REMOVING_EMPLOYEE,
   REMOVE_EMPLOYEE_SUCCESS,
-  REMOVE_EMPLOYEE_FAIL
+  REMOVE_EMPLOYEE_FAIL,
+  UPDATE_EMPLOYEE_SEARCH,
+  RESET_EMPLOYEE_SEARCH
 } from '../constants';
 
 //below is to test API fetching process
@@ -35,6 +37,18 @@ exports.removeEmployee = (employeeId, navigation) => {
     } else {
       dispatch(removeFail())
     }
+  }
+}
+
+exports.updateSearch = (text) => {
+  return (dispatch) => {
+    dispatch(updatingSearch(text))
+  }
+}
+
+exports.resetEmployeeSearchBar = () => {
+  return (dispatch) => {
+    dispatch(resetSearch())
   }
 }
 
@@ -73,5 +87,18 @@ const removeSuccess = (data) => {
 const removeFail = () => {
   return {
     type: REMOVE_EMPLOYEE_FAIL
+  }
+}
+
+const updatingSearch = (data) => {
+  return {
+    type: UPDATE_EMPLOYEE_SEARCH,
+    payload: data
+  }
+}
+
+const resetSearch = () => {
+  return {
+    type: RESET_EMPLOYEE_SEARCH
   }
 }

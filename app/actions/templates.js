@@ -1,7 +1,9 @@
 import {
   FETCHING_ALL_TEMPLATES,
   FETCH_ALL_TEMPLATES_SUCCESS,
-  FETCH_ALL_TEMPLATES_FAIL
+  FETCH_ALL_TEMPLATES_FAIL,
+  UPDATE_TEMPLATE_SEARCH,
+  RESET_TEMPLATE_SEARCH
 } from '../constants'
 
 import {testTemplateData} from '../testTemplateData'

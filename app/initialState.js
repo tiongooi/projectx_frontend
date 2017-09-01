@@ -17,7 +17,8 @@ const initialState = {
     isFetching: false,
     isRemoving: false,
     message: '',
-    allEmployees: []
+    allEmployees: [],
+    search: ''
   },
   clients: {
     isFetching: false,
@@ -53,7 +54,8 @@ const initialState = {
     isFetching: false,
     isRemoving: false,
     message: '',
-    allTemplates: []
+    allTemplates: [],
+    search: ''
   },
   editSetJob: {
     isUpdating: false,

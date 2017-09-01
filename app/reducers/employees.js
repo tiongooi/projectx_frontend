@@ -5,7 +5,9 @@ import {
   FETCHING_ALL_EMPLOYEES_FAIL,
   REMOVING_EMPLOYEE,
   REMOVE_EMPLOYEE_SUCCESS,
-  REMOVE_EMPLOYEE_FAIL
+  REMOVE_EMPLOYEE_FAIL,
+  UPDATE_EMPLOYEE_SEARCH,
+  RESET_EMPLOYEE_SEARCH
 } from '../constants';
 
 const employeesReducer = (state = initialState.employees, action) => {
@@ -48,6 +50,18 @@ const employeesReducer = (state = initialState.employees, action) => {
         ...state,
         isRemoving: false,
         message: 'An error has occured, please try again'
+      }
+    }
+    case UPDATE_EMPLOYEE_SEARCH: {
+      return {
+        ...state,
+        search: action.payload
+      }
+    }
+    case RESET_EMPLOYEE_SEARCH: {
+      return {
+        ...state,
+        search: ''
       }
     }
     default: return state

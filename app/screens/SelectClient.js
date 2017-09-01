@@ -31,13 +31,14 @@ class SelectClient extends Component {
     let filteredClient = this.props.allClients.filter(client => {
       return client.fName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
              client.lName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             client.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
              client.propertyName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
              client.mobile.indexOf(this.props.search) !== -1
     })
     if (this.props.search.length !== 0 && filteredClient.length == 0 && hasClient == true) {
       clientExists = false
     }
-
+ 
     return(
       <View>
         <View>
@@ -47,6 +48,7 @@ class SelectClient extends Component {
           value={this.props.search}
           maxLength={50}
           onChangeText={(text) => this.props.updateSearch(text)}
+          autoCorrect={false}
           />
         </View>
           {
