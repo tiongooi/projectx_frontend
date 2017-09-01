@@ -5,6 +5,7 @@ import {setTitle} from '../actions/newJob'
 import {setComment} from '../actions/newJob'
 import store from '../storeConfig'
 import {updateSetTitleAndCommentScreenKey} from '../actions/newJob'
+import {resetEmployeeSearchBar} from '../actions/employees'
 import XButton from '../components/presentation/XButton'
 
 class SetTitleAndComment extends Component {
@@ -16,7 +17,8 @@ class SetTitleAndComment extends Component {
   }
 
   componentWillMount() {
-    store.dispatch(updateSetTitleAndCommentScreenKey(this.props.navigation.state.key));
+    store.dispatch(updateSetTitleAndCommentScreenKey(this.props.navigation.state.key))
+    store.dispatch(resetEmployeeSearchBar())
   }
 
   render() {
