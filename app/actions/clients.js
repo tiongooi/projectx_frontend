@@ -4,7 +4,9 @@ import {
   FETCHING_ALL_CLIENTS_FAIL,
   REMOVING_CLIENT,
   REMOVE_CLIENT_SUCCESS,
-  REMOVE_CLIENT_FAIL
+  REMOVE_CLIENT_FAIL,
+  UPDATE_CLIENT_SEARCH,
+  RESET_CLIENT_SEARCH
 } from '../constants';
 
 import {clients} from '../testClientData';
@@ -30,10 +32,22 @@ exports.removeClient = (clientId,navigation) => {
     const res = {message: 'ok', data:clients2 }
     if (res.message == 'ok') {
       dispatch(removeSuccess(res.data))
-      navigation.goBack() 
+      navigation.goBack()
     } else {
       dispatch(removeFail())
     }
+  }
+}
+
+exports.updateSearch = (text) => {
+  return (dispatch) => {
+    dispatch(updatingSearch(text))
+  }
+}
+
+exports.resetClientSearchBar = () => {
+  return (dispatch) => {
+    dispatch(resetSearch())
   }
 }
 
@@ -72,5 +86,18 @@ const removeSuccess = (data) => {
 const removeFail = () => {
   return {
     type: REMOVE_CLIENT_FAIL
+  }
+}
+
+const updatingSearch = (data) => {
+  return {
+    type: UPDATE_CLIENT_SEARCH,
+    payload: data
+  }
+}
+
+const resetSearch = () => {
+  return {
+    type: RESET_CLIENT_SEARCH
   }
 }
