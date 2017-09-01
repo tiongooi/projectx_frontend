@@ -8,6 +8,8 @@ import {
   REMOVING_TASK,
   REMOVE_TASK_SUCCESS,
   REMOVE_TASK_FAIL,
+  UPDATE_TASK_SEARCH,
+  RESET_TASK_SEARCH
 } from '../constants';
 
 import initialState from '../initialState';
@@ -72,6 +74,18 @@ const tasksReducer = (state = initialState.tasks, action) => {
         ...state,
         isRemoving: false,
         message: action.payload
+      }
+    }
+    case UPDATE_TASK_SEARCH: {
+      return {
+        ...state,
+        search: action.payload
+      }
+    }
+    case RESET_TASK_SEARCH: {
+      return {
+        ...state,
+        search: ''
       }
     }
     default: return state

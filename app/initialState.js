@@ -23,14 +23,16 @@ const initialState = {
     isFetching: false,
     isRemoving: false,
     message: '',
-    allClients: []
+    allClients: [],
+    search: ''
   },
   tasks: {
     isFetching: false,
     isRemoving: false,
     isCreating: false,
     message: '',
-    allTasks: []
+    allTasks: [],
+    search: ''
   },
   newJob: {
     isInitializing: false,

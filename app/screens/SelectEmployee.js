@@ -4,6 +4,7 @@ import {Text, View, TouchableHighlight, ScrollView} from 'react-native'
 import EmployeeCardSelectable from '../components/presentation/EmployeeCardSelectable'
 import store from '../storeConfig'
 import {updateEmployeeScreenKey} from '../actions/newJob'
+import {resetTaskSearchBar} from '../actions/tasks'
 import XButton from '../components/presentation/XButton'
 
 class SelectEmployee extends Component {
@@ -16,6 +17,10 @@ class SelectEmployee extends Component {
 
   componentWillMount() {
     store.dispatch(updateEmployeeScreenKey(this.props.navigation.state.key));
+  }
+
+  componentDidMount() {
+    store.dispatch(resetTaskSearchBar())
   }
 
   render() {

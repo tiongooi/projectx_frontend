@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {StackNavigator} from 'react-navigation'
 import {resetJobData} from '../actions/newJob'
 import {resetEditJob} from '../actions/editSetJob'
+import {resetClientSearchBar} from '../actions/clients'
+import {resetTaskSearchBar} from '../actions/tasks'
 import store from '../storeConfig'
 
 export default DismissableStackNavigator = (routes, options) => {
@@ -13,6 +15,8 @@ export default DismissableStackNavigator = (routes, options) => {
     componentWillUnmount() {
       store.dispatch(resetJobData())
       store.dispatch(resetEditJob())
+      store.dispatch(resetClientSearchBar())
+      store.dispatch(resetTaskSearchBar())
     }
 
     render() {

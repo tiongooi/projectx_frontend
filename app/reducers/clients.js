@@ -4,7 +4,9 @@ import {
   FETCHING_ALL_CLIENTS_FAIL,
   REMOVING_CLIENT,
   REMOVE_CLIENT_SUCCESS,
-  REMOVE_CLIENT_FAIL
+  REMOVE_CLIENT_FAIL,
+  UPDATE_CLIENT_SEARCH,
+  RESET_CLIENT_SEARCH
 } from '../constants';
 
 import initialState from '../initialState';
@@ -49,6 +51,18 @@ const clientsReducer = (state = initialState.clients, action) => {
         ...state,
         isRemoving: false,
         message: 'An error has occured, please try again'
+      }
+    }
+    case UPDATE_CLIENT_SEARCH: {
+      return {
+        ...state,
+        search: action.payload
+      }
+    }
+    case RESET_CLIENT_SEARCH: {
+      return {
+        ...state,
+        search: ''
       }
     }
     default: return state

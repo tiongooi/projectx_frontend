@@ -8,6 +8,8 @@ import {
   REMOVING_TASK,
   REMOVE_TASK_SUCCESS,
   REMOVE_TASK_FAIL,
+  UPDATE_TASK_SEARCH,
+  RESET_TASK_SEARCH
 } from '../constants';
 
 import {testTaskData} from '../testTaskData';
@@ -49,6 +51,18 @@ exports.removeTask = () => {
     } else {
       dispatch(removeFail())
     }
+  }
+}
+
+exports.updateSearch = (text) => {
+  return (dispatch) => {
+    dispatch(updatingSearch(text))
+  }
+}
+
+exports.resetTaskSearchBar = () => {
+  return (dispatch) => {
+    dispatch(resetSearch())
   }
 }
 
@@ -109,5 +123,18 @@ const removeFail = () => {
   return {
     type: REMOVE_TASK_FAIL,
     payload: 'An error has occured, please try again'
+  }
+}
+
+const updatingSearch = (data) => {
+  return {
+    type: UPDATE_TASK_SEARCH,
+    payload: data
+  }
+}
+
+const resetSearch = () => {
+  return {
+    type: RESET_TASK_SEARCH
   }
 }
