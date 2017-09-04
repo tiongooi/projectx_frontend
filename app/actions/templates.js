@@ -21,6 +21,18 @@ exports.fetchTemplates = () => {
   }
 }
 
+exports.updateSearch = (text) => {
+  return (dispatch) => {
+    dispatch(updatingSearch(text))
+  }
+}
+
+exports.resetTemplateSearchBar = () => {
+  return (dispatch) => {
+    dispatch(resetSearch())
+  }
+}
+
 const fetchingTemplates = () => {
   return {
     type: FETCHING_ALL_TEMPLATES
@@ -38,5 +50,18 @@ const fetchFail = () => {
   return {
     type: FETCH_ALL_TEMPLATES_FAIL,
     payload: 'An error has occured, please try again'
+  }
+}
+
+const updatingSearch = (data) => {
+  return {
+    type: UPDATE_TEMPLATE_SEARCH,
+    payload: data
+  }
+}
+
+const resetSearch = () => {
+  return {
+    type: RESET_TEMPLATE_SEARCH
   }
 }

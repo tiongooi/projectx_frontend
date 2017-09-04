@@ -7,8 +7,9 @@ import Maps from '../components/presentation/Maps'
 import JobCard from '../components/presentation/JobCard'
 import {initiateNewJob} from '../actions/newJob'
 import XButton from '../components/presentation/XButton'
-import store from '../storeConfig';
-import {resetJobData} from '../actions/newJob';
+import store from '../storeConfig'
+import {resetTemplateSearchBar} from '../actions/templates'
+import {resetJobData} from '../actions/newJob'
 
 class ConfirmNewJob_fromTemplate extends Component {
   static navigationOptions = ({navigation}) => {
@@ -20,6 +21,10 @@ class ConfirmNewJob_fromTemplate extends Component {
 
   componentWillUnmount() {
     store.dispatch(resetJobData())
+  }
+
+  componentWillMount() {
+    store.dispatch(resetTemplateSearchBar())
   }
 
   render() {

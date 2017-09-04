@@ -5,6 +5,7 @@ import {resetEditJob} from '../actions/editSetJob'
 import {resetClientSearchBar} from '../actions/clients'
 import {resetTaskSearchBar} from '../actions/tasks'
 import {resetEmployeeSearchBar} from '../actions/employees'
+import {resetTemplateSearchBar} from '../actions/templates'
 import store from '../storeConfig'
 
 export default DismissableStackNavigator = (routes, options) => {
@@ -19,6 +20,7 @@ export default DismissableStackNavigator = (routes, options) => {
       store.dispatch(resetClientSearchBar())
       store.dispatch(resetTaskSearchBar())
       store.dispatch(resetEmployeeSearchBar())
+      store.dispatch(resetTemplateSearchBar())
     }
 
     render() {

@@ -8,6 +8,7 @@ import store from '../storeConfig';
 import {resetJobData} from '../actions/newJob';
 import {updateSearch} from '../actions/clients';
 import {resetClientSearchBar} from '../actions/clients';
+import {resetTemplateSearchBar} from '../actions/templates';
 
 class SelectClient extends Component {
   static navigationOptions = ({navigation}) => {
@@ -20,6 +21,10 @@ class SelectClient extends Component {
   componentWillUnmount() {
     store.dispatch(resetJobData())
     store.dispatch(resetClientSearchBar())
+  }
+
+  componentWillMount() {
+    store.dispatch(resetTemplateSearchBar())
   }
 
   render() {
@@ -38,7 +43,7 @@ class SelectClient extends Component {
     if (this.props.search.length !== 0 && filteredClient.length == 0 && hasClient == true) {
       clientExists = false
     }
- 
+
     return(
       <View>
         <View>
