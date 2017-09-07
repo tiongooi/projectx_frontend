@@ -142,7 +142,7 @@ const Navigator = DrawerNavigator({
     navigationOptions: {
       drawerLabel: 'Employee'
     }
-  },
+  }, 
   Clients: {
     screen: ClientStack
   },

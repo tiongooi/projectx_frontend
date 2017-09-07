@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Text, View, TouchableHighlight, ScrollView} from 'react-native';
-import {fetchClients} from '../actions/clients';
-import ClientCard from '../components/presentation/ClientCard';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Text, View, TouchableHighlight, ScrollView, TextInput} from 'react-native'
+import ClientCard from '../components/presentation/ClientCard'
+import {resetClientSearchBar} from '../actions/clients'
+import {updateSearch} from '../actions/clients'
+import store from '../storeConfig'
 
 class Clients extends Component {
 
-  componentWillMount() {
-    this.props.fetchClients();
+  componentWillUnmount() {
+    store.dispatch(resetClientSearchBar())
   }
 
   render() {
@@ -16,13 +18,29 @@ class Clients extends Component {
     if (this.props.allClients.length !== 0) {
       hasClient = true
     }
+    let filteredClient = this.props.allClients.filter(client => {
+      return client.fName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             client.lName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             client.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             client.propertyName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             client.mobile.indexOf(this.props.search) !== -1
+    })
     return (
       <View>
-        <View><Text>Search bar goes here</Text></View>
+        <View>
+          <TextInput
+          style={{height: 40, borderColor: '#f2f3f4', borderWidth: 1}}
+          placeholder={'Search client'}
+          value={this.props.search}
+          maxLength={50}
+          onChangeText={(text) => this.props.updateSearch(text)}
+          autoCorrect={false}
+          />
+        </View>
         <ScrollView>
           {
             hasClient ? (
-              this.props.allClients.map((client, index) => {
+              filteredClient.map((client, index) => {
               return <View key={index}>
                 <TouchableHighlight onPress={() => navigate('ClientSummary', {client})}>
                   <View>
@@ -43,15 +61,15 @@ class Clients extends Component {
 
 mapStateToProps = (state) => {
   return {
-    allClients: state.clients.allClients
+    allClients: state.clients.allClients,
+    search: state.clients.search
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
-    clicked: () => alert('hi there'),
-    fetchClients: () => dispatch(fetchClients())
+    updateSearch: (text) => dispatch(updateSearch(text))
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Clients);
+export default connect(mapStateToProps,mapDispatchToProps)(Clients)
