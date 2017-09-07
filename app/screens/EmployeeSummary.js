@@ -1,9 +1,16 @@
-import React, {Component} from 'react';
-import {Text, View, TouchableHighlight} from 'react-native';
-import {connect} from 'react-redux';
-import {removeEmployee} from '../actions/employees';
+import React, {Component} from 'react'
+import {Text, View, TouchableHighlight} from 'react-native'
+import {connect} from 'react-redux'
+import {removeEmployee} from '../actions/employees'
+import {resetEmployeeSearchBar} from '../actions/employees'
+import store from '../storeConfig'
 
 class EmployeeSummary extends Component {
+
+  componentWillMount() {
+    store.dispatch(resetEmployeeSearchBar())
+  }
+
   render() {
     const employee = this.props.navigation.state.params.employee;
     const {navigation} = this.props;

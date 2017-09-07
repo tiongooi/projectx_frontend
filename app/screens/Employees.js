@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View,Text,TouchableHighlight,ScrollView} from 'react-native';
-import {fetchEmployees} from '../actions/employees';
-import EmployeeCard from '../components/presentation/EmployeeCard';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {View,Text,TouchableHighlight,ScrollView,TextInput} from 'react-native'
+import {resetEmployeeSearchBar} from '../actions/employees'
+import {updateSearch} from '../actions/employees'
+import EmployeeCard from '../components/presentation/EmployeeCard'
+import store from '../storeConfig'
 
 class Employees extends Component {
 
-  componentWillMount() {
-    this.props.fetchAllEmployees()
+  componentWillUnmount() {
+    store.dispatch(resetEmployeeSearchBar())
   }
 
   render() {
@@ -16,13 +18,28 @@ class Employees extends Component {
     if (this.props.allEmployees.length !== 0) {
       hasEmployee = true
     }
+    let filteredEmployee = this.props.allEmployees.filter(employee => {
+      return employee.fName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             employee.lName.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             employee.email.toLowerCase().indexOf(this.props.search.toLowerCase()) !== -1 ||
+             employee.mobile.indexOf(this.props.search) !== -1
+    })
     return(
       <View>
-        <View><Text>Search bar goes here</Text></View>
+        <View>
+          <TextInput
+          style={{height: 40, borderColor: '#f2f3f4', borderWidth: 1}}
+          placeholder={'Search employee'}
+          value={this.props.search}
+          maxLength={50}
+          onChangeText={(text) => this.props.updateSearch(text)}
+          autoCorrect={false}
+          />
+        </View>
         <ScrollView>
           {
             hasEmployee ? (
-              this.props.allEmployees.map((employee, index) => {
+              filteredEmployee.map((employee, index) => {
                 return <View key={index}>
                   <TouchableHighlight onPress={ () => navigate('EmployeeSummary',{employee}) }>
                     <View>
@@ -41,14 +58,14 @@ class Employees extends Component {
 
 mapStateToProps = (state) => {
   return {
-    allEmployees: state.employees.allEmployees
+    allEmployees: state.employees.allEmployees,
+    search: state.employees.search
   }
 }
 
 mapDispatchToProps = (dispatch) => {
   return {
-    clicked: () => alert('clicked'),
-    fetchAllEmployees: () => dispatch(fetchEmployees())
+    updateSearch: (text) => dispatch(updateSearch(text))
   }
 }
 

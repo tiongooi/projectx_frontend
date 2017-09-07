@@ -1,9 +1,16 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {View,Text,TouchableHighlight} from 'react-native';
-import {removeClient} from '../actions/clients';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {View,Text,TouchableHighlight} from 'react-native'
+import {removeClient} from '../actions/clients'
+import {resetClientSearchBar} from '../actions/clients'
+import store from '../storeConfig'
 
 class ClientSummary extends Component {
+
+  componentWillMount() {
+    store.dispatch(resetClientSearchBar())
+  }
+
   render() {
     let client = this.props.navigation.state.params.client
 
